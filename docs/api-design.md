@@ -5,10 +5,6 @@ API Design
 - Endpoint path: /api/rollercoasters
 - Endpoint methods: GET
 
-- Headers:
-
-  - Authorization: Bearer token
-
 - Response: a roller coaster's details
 - Response shape:
   ```json
@@ -25,6 +21,7 @@ API Design
               "park": {
                   "id": str,
                   "name": str,
+                  "country": str,
               },
               "mainImage":{
                   "id": str,
@@ -40,10 +37,6 @@ API Design
 - Endpoint path: /api/rollercoasters/{rollercoaster_id}
 - Endpoint methods: GET
 
-- Headers:
-
-  - Authorization: Bearer token
-
 - Response: a roller coaster's details
 - Response shape:
   ```json
@@ -59,6 +52,7 @@ API Design
               "park": {
                   "id": str,
                   "name": str,
+                  "country": str,
               },
               "mainImage":{
                   "id": str,
@@ -75,9 +69,6 @@ API Design
 - Endpoint methods: GET
 - Query parameters:
   - q: the words to search for
-- Headers:
-
-  - Authorization: Bearer token
 
 - Response: a roller coaster's details
 - Response shape:
@@ -95,6 +86,7 @@ API Design
               "park": {
                   "id": str,
                   "name": str,
+                  "country": str,
               },
               "mainImage":{
                   "id": str,
@@ -107,42 +99,191 @@ API Design
 
 ### get park list
 
+- Endpoint path: /api/parks/
+- Endpoint methods: GET
+
+- Response: a list of parks
+- Response shape:
+  ```json
+  {
+      "parks": [
+        {
+          "id": int,
+          "name": str,
+          "country": {
+            "name": str
+          },
+        }
+      ]
+  }
+  ```
+
 ### get park details
 
+- Endpoint path: /api/parks/{park_id}
+- Endpoint methods: GET
+
+- Response: get park detail
+- Response shape:
+  ```json
+  {
+      "parks": [
+        {
+          "id": int,
+          "name": str,
+          "country": {
+            "name": str
+          },
+        }
+      ]
+  }
+  ```
+
 ### get image list
+- Endpoint path: /api/images/
+- Endpoint methods: GET
+
+- Response: a list of roller coaster images
+- Response shape:
+  ```json
+  {
+      "images": [
+        {
+          "id": str,
+          "coaster": str,  // reference to coaster href
+          "path": str,
+        }
+      ]
+  }
+  ```
 
 ### get image details
+- Endpoint path: /api/images/{image_id}
+- Endpoint methods: GET
+
+- Response: roller coaster image detail
+- Response shape:
+  ```json
+  {
+      "images": [
+        {
+          "id": str,
+          "coaster": str,  // reference to coaster href
+          "path": str,
+        }
+      ]
+  }
+  ```
 
 ### get favorites list
+- Endpoint path: /api/favorites/{user_id}
+- Endpoint methods: GET
 
+- Headers:
+  - Authorization: Bearer token
+
+- Response: a roller coaster's details
+- Response shape:
+  ```json
+  {
+      "roller_coaster": [
+          {
+              "id": int,
+              "name": str,
+              "height": int,
+              "speed": int,
+              "inversionsNumber": int,
+              "location": str,
+              "park": {
+                  "id": str,
+                  "name": str,
+                  "country": str,
+              },
+              "mainImage":{
+                  "id": str,
+                  "path": str,
+              },
+          }
+      ]
+  }
+  ```
 ### edit favorites list
+- Endpoint path: /api/favorites/{user_id}
+- Endpoint methods: PUT
 
+- Headers:
+  - Authorization: Bearer token
+
+- Request shape (form):
+  - roller_coaster_id: int
+
+- Response: Updated favorites list
+- Response shape:
+  ```json
+  {
+    "roller_coaster": [
+      {
+        "id": int,
+        "name": str,
+        "description": str,
+      },
+    ]
+  }
+  ```
 ### delete object from favorites list
+- Endpoint path: /api/favorites/{user_id}
+- Endpoint methods: DELETE
 
-### create a favorites list
+- Headers:
+  - Authorization: Bearer token
 
-<!-- ### get list of accounts
-* Endpoint path: /api/accounts
-* Endpoint methods: GET
+- Response: Updated favorites list
+- Response shape:
+  ```json
+  {
+    "roller_coaster": [
+      {
+        "id": int,
+      },
+    ]
+  }
+  ```
 
-* Response: a users account information
-* Response shape:
-    ```json
-    {
-        "accounts": [
-            {
-                "id": int,
-                "user": [
-                    {
-                    "username": str,
-                    "password": str,
-                    "first_name": str,
-                    "last_name": str
-                }
-            ]
-        }
-        ]
-         -->
+### create a favorites list item
+- Endpoint path: /api/favorites/{user_id}
+- Endpoint methods: POST
+
+- Headers:
+  - Authorization: Bearer token
+
+- Request shape (form):
+  - roller_coaster_id: int
+
+- Response: a roller coaster's details
+- Response shape:
+  ```json
+  {
+      "roller_coaster": [
+          {
+              "id": int,
+              "name": str,
+              "height": int,
+              "speed": int,
+              "inversionsNumber": int,
+              "location": str,
+              "park": {
+                  "id": str,
+                  "name": str,
+                  "country": str,
+              },
+              "mainImage":{
+                  "id": str,
+                  "path": str,
+              },
+          }
+      ]
+  }
+  ```
 
 ### get user information
 
@@ -150,11 +291,31 @@ API Design
 - Endpoint methods: GET
 
 - Headers:
-
-  - Authorization:
+  - Authorization: Bearer token
 
 - Response: a users account information
 - Response shape:
+  ```json
+  {
+      "user": [
+          {
+              "username": str,
+              "password": str,
+              "first_name": str,
+              "last_name": str,
+              "email": str,
+              "favorites": lst, // ?
+          }
+      ]
+  }
+  ```
+
+### create a new account
+
+- Endpoint path: /api/accounts
+- Endpoint methods: POST
+
+- Request shape (form):
   ```json
   {
       "user": [
@@ -169,13 +330,7 @@ API Design
   }
   ```
 
-### create a new account
-
-- Endpoint path: /api/accounts
-- Endpoint methods: POST
-
 - Headers:
-
   - Authorization:
 
 - Response: a users account information
@@ -200,7 +355,6 @@ API Design
 - Endpoint method: POST
 
 - Request shape (form):
-
   - username: string
   - password: string
 
@@ -221,7 +375,6 @@ API Design
 - Endpoint method: DELETE
 
 - Headers:
-
   - Authorization: Bearer token
 
 - Response: Always true
