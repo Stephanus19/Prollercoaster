@@ -1,0 +1,1 @@
+Today we worked on our API design and discussed the completion of the wireframing design.  We had questions about how to do the API design when our knowledge is limited to what we have done in Django so far.  We came to the conclusion it seems like we will not need as many endpoints as the standard small site because our site is designed more dynamically. 2.9.23
