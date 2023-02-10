@@ -5,7 +5,33 @@ API Design
 - Endpoint path: /api/rollercoasters
 - Endpoint methods: GET
 
-- Response: a roller coaster's details
+- Request body:
+  ```json
+  {
+
+      "roller_coaster": [
+          {
+              "id": int,
+              "name": str,
+              "height": int,
+              "speed": int,
+              "inversionsNumber": int,
+              "location": str,
+              "park": {
+                  "id": str,
+                  "name": str,
+                  "country": str,
+              },
+              "mainImage":{
+                  "id": str,
+                  "path": str,
+              },
+          }
+      ]
+  }
+  ```
+
+- Response: A successful get request for roller coaster list
 - Response shape:
   ```json
   {
@@ -37,7 +63,33 @@ API Design
 - Endpoint path: /api/rollercoasters/{rollercoaster_id}
 - Endpoint methods: GET
 
-- Response: a roller coaster's details
+- Request body:
+  ```json
+  {
+
+      "roller_coaster": [
+          {
+              "id": int,
+              "name": str,
+              "height": int,
+              "speed": int,
+              "inversionsNumber": int,
+              "location": str,
+              "park": {
+                  "id": str,
+                  "name": str,
+                  "country": str,
+              },
+              "mainImage":{
+                  "id": str,
+                  "path": str,
+              },
+          }
+      ]
+  }
+  ```
+
+- Response: a successful get request for a roller coaster detail
 - Response shape:
   ```json
   {
@@ -102,6 +154,21 @@ API Design
 - Endpoint path: /api/parks/
 - Endpoint methods: GET
 
+- Request body:
+  ```json
+  {
+      "parks": [
+        {
+          "id": int,
+          "name": str,
+          "country": {
+            "name": str
+          },
+        }
+      ]
+  }
+  ```
+
 - Response: a list of parks
 - Response shape:
   ```json
@@ -123,6 +190,21 @@ API Design
 - Endpoint path: /api/parks/{park_id}
 - Endpoint methods: GET
 
+- Request body:
+  ```json
+  {
+      "parks": [
+        {
+          "id": int,
+          "name": str,
+          "country": {
+            "name": str
+          },
+        }
+      ]
+  }
+  ```
+
 - Response: get park detail
 - Response shape:
   ```json
@@ -143,7 +225,20 @@ API Design
 - Endpoint path: /api/images/
 - Endpoint methods: GET
 
-- Response: a list of roller coaster images
+- Request body:
+  ```json
+  {
+      "images": [
+        {
+          "id": str,
+          "coaster": str,  // reference to coaster href
+          "path": str,
+        }
+      ]
+  }
+  ```
+
+- Response: a successful get request for roller coaster image
 - Response shape:
   ```json
   {
@@ -161,7 +256,20 @@ API Design
 - Endpoint path: /api/images/{image_id}
 - Endpoint methods: GET
 
-- Response: roller coaster image detail
+- Request body:
+  ```json
+  {
+      "images": [
+        {
+          "id": str,
+          "coaster": str,  // reference to coaster href
+          "path": str,
+        }
+      ]
+  }
+  ```
+
+- Response: a successful get request for roller coaster image detail
 - Response shape:
   ```json
   {
@@ -179,6 +287,31 @@ API Design
 - Endpoint path: /api/favorites/{user_id}
 - Endpoint methods: GET
 
+- Request body:
+  ```json
+  {
+      "roller_coaster": [
+          {
+              "id": int,
+              "name": str,
+              "height": int,
+              "speed": int,
+              "inversionsNumber": int,
+              "location": str,
+              "park": {
+                  "id": str,
+                  "name": str,
+                  "country": str,
+              },
+              "mainImage":{
+                  "id": str,
+                  "path": str,
+              },
+          }
+      ]
+  }
+  ```
+
 - Headers:
   - Authorization: Bearer token
 
@@ -188,6 +321,7 @@ API Design
   {
       "roller_coaster": [
           {
+              "user_id": int,
               "id": int,
               "name": str,
               "height": int,
@@ -214,8 +348,19 @@ API Design
 - Headers:
   - Authorization: Bearer token
 
-- Request shape (form):
-  - roller_coaster_id: int
+- Request body (form):
+  ```json
+  {
+    "roller_coaster": [
+      {
+        "user_id": int,
+        "id": int,
+        "name": str,
+        "description": str,
+      },
+    ]
+  }
+  ```
 
 - Response: Updated favorites list
 - Response shape:
@@ -223,6 +368,7 @@ API Design
   {
     "roller_coaster": [
       {
+        "user_id": int,
         "id": int,
         "name": str,
         "description": str,
@@ -237,15 +383,23 @@ API Design
 - Headers:
   - Authorization: Bearer token
 
-- Response: Updated favorites list
-- Response shape:
+  - Request body:
   ```json
   {
     "roller_coaster": [
       {
+        "user_id": int,
         "id": int,
       },
     ]
+  }
+  ```
+
+- Response: Deleted item from favorites list
+- Response shape:
+  ```json
+  {
+    "message": "favorite removed."
   }
   ```
 
@@ -256,15 +410,39 @@ API Design
 - Headers:
   - Authorization: Bearer token
 
-- Request shape (form):
-  - roller_coaster_id: int
+- Request body (form):
+  ```json
+  {
+      "roller_coaster": [
+          {
+              "id": int,
+              "name": str,
+              "height": int,
+              "speed": int,
+              "inversionsNumber": int,
+              "location": str,
+              "park": {
+                  "id": str,
+                  "name": str,
+                  "country": str,
+              },
+              "mainImage":{
+                  "id": str,
+                  "path": str,
+              },
+          }
+      ]
+  }
+  ```
 
-- Response: a roller coaster's details
+- Response: Adding an item to favorites list
 - Response shape:
   ```json
   {
       "roller_coaster": [
           {
+              "user_id": int,
+              "favorited": boolean,
               "id": int,
               "name": str,
               "height": int,
@@ -293,6 +471,21 @@ API Design
 - Headers:
   - Authorization: Bearer token
 
+- Request body:
+  ```json
+  {
+      "user": [
+          {
+              "username": str,
+              "password": str,
+              "first_name": str,
+              "last_name": str,
+              "email": str,
+          }
+      ]
+  }
+  ```
+
 - Response: a users account information
 - Response shape:
   ```json
@@ -304,7 +497,6 @@ API Design
               "first_name": str,
               "last_name": str,
               "email": str,
-              "favorites": lst, // ?
           }
       ]
   }
@@ -315,7 +507,7 @@ API Design
 - Endpoint path: /api/accounts
 - Endpoint methods: POST
 
-- Request shape (form):
+- Request body (form):
   ```json
   {
       "user": [
@@ -333,12 +525,13 @@ API Design
 - Headers:
   - Authorization:
 
-- Response: a users account information
+- Response: Created a user account
 - Response shape:
   ```json
   {
       "user": [
           {
+              "user_id": int,
               "username": str,
               "password": str,
               "first_name": str,
