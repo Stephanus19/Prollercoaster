@@ -26,6 +26,7 @@ services:
     volumes:
       - ./sample_service:/app
     environment:
+      SIGNING_KEY: 21251463829B9284AA7316D4D2F6D
       DATABASE_URL: postgresql://rc:password@postgres/postgres-data
       WAIT_HOSTS: postgres:5432
   pg-admin:
