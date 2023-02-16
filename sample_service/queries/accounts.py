@@ -9,6 +9,14 @@ class DuplicateAccountError(ValueError):
 
 
 class Account(BaseModel):
+    id: int
+    username: str
+    hashed_password: str
+    email: str
+    first_name: str
+    last_name: str
+
+class AccountIn(BaseModel):
     username: str
     password: str
     email: str
@@ -19,19 +27,14 @@ class Account(BaseModel):
 class AccountOut(BaseModel):
     id: int
     username: str
-    password: str
+    # hashed_password: str
     email: str
     first_name: str
     last_name: str
 
 
-class AccountOutWithPassword(AccountOut):
-    hashed_password: str
-
-
-
 class AccountRepository:
-    def create(self, account: Account) -> AccountOut:
+    def create(self, account: AccountIn, hashed_password:str) -> Account:
         #connect the DB
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -46,17 +49,22 @@ class AccountRepository:
                 """,
                 [
                     account.username,
-                    account.password,
+                    hashed_password,
                     account.email,
                     account.first_name,
                     account.last_name
                 ]
                 )
                 id = result.fetchone()[0]
-                old_data = account.dict()
-                return AccountOut(id=id, **old_data)
+                # old_data = account.dict()
+                # old_data['hashed_password'] = hashed_password
+                # del old_data['password']
+                # print(old_data)
+                # return Account(id=id, **old_data)
+                return Account(id=id, username=account.username, hashed_password=hashed_password,
+                                first_name=account.first_name, last_name=account.last_name, email=account.email)
 
-    def get(self, username: str) -> AccountOut:
+    def get(self, username: str) -> Account:
         #connect the DB
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -75,17 +83,24 @@ class AccountRepository:
                         return None
                     # old_data = account.dict()
                     # return Account(id=id[0], username=id[1], **old_data)
-                    return self.record_to_account_out(record)
+                    return Account(
+                        id=record[0],
+                        username=record[1],
+                        hashed_password=record[2],
+                        email=record[3],
+                        first_name=record[4],
+                        last_name=record[5],
+                        )
 
-    def record_to_account_out(self, record):
-        return AccountOut(
-            id=record[0],
-            username=record[1],
-            first_name=record[2],
-            last_name=record[3],
-            email=record[4],
-            password=record[5],
-        )
+    # def record_to_account_out(self, record):
+    #     return AccountOut(
+    #         id=record[0],
+    #         username=record[1],
+    #         first_name=record[2],
+    #         last_name=record[3],
+    #         email=record[4],
+    #         password=record[5],
+    #     )
 
     def get_all(self):
         with pool.connection() as conn:
