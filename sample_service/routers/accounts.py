@@ -32,7 +32,7 @@ async def create_accounts(
     hashed_password = authenticator.hash_password(info.password)
     print(info)
     try:
-        
+
         account = repo.create(info, hashed_password)
     except DuplicateAccountError:
         raise HTTPException(
@@ -40,9 +40,7 @@ async def create_accounts(
         detail="Cannot create an account with those credentials",
         )
     form = AccountForm(username=info.username, password=info.password)
-    print(account)
     token = await authenticator.login(response, request, form, repo)
-    print('hello world')
     return AccountToken(account=account, **token.dict())
 
 
@@ -54,7 +52,7 @@ def get_accounts(
     return {
         "accounts": repo.get_all(),
     }
-    
+
 
 @router.get("/accounts/{username}")
 def get_account(
@@ -95,7 +93,3 @@ async def get_token(
 #     form = AccountForm(username=info.email, password=info.password)
 #     token = await authenticator.login(response, request, form, repo)
 #     return AccountToken(account=account, **token.dict())
-
-
-
-

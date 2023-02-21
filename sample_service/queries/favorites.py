@@ -3,130 +3,81 @@ from typing import Optional
 from queries.pool import pool
 
 
-class DuplicateAccountError(ValueError):
-    pass
-    
-class Account(BaseModel):
-    id: int
-    username: str
-    hashed_password: str
-    email: str
-    first_name: str
-    last_name: str
-
-class AccountIn(BaseModel):
-    username: str
-    password: str
-    email: str
-    first_name: str
-    last_name: str
-
-
-class AccountOut(BaseModel):
-    id: int
-    username: str
-    # hashed_password: str
-    email: str
-    first_name: str
-    last_name: str
-
 class Favorites(BaseModel):
     id:int
     user_id: int
     rollercoaster_id: str
 
 class FavoritesIn(BaseModel):
-    user_id: int
+    # user_id: int
     rollercoaster_id: str
 
 class FavoritesOut(BaseModel):
     id: int
+    rollercoaster_id: str
 
 
 class FavoritesRepository:
-    def create_favorite(self, favorites: FavoritesIn) -> Favorites:
+    def create(self, favorites: FavoritesIn, user_id: int) -> Favorites:
         #connect the DB
         with pool.connection() as conn:
             with conn.cursor() as db:
                 #Run our INSERT
                 result = db.execute(
                 """
-                INSERT INTO accounts
+                INSERT INTO favorites
                     (user_id, rollercoaster_id)
                 VALUES
                 (%s,%s)
                 RETURNING id;
                 """,
                 [
-                    favorites.user_id,
+                    user_id,
                     favorites.rollercoaster_id,
                 ]
                 )
-                record= None
+                # record= None
                 id = result.fetchone()[0]
-                if id is not None:
-                    record={}
+                old_data = favorites.dict()
+                return FavoritesOut(id=id, **old_data)
+                # if id is not None:
+                #     record={}
+                #     for i, column in enumerate(db.description):
+                #         record[column.name]=id[i]
+                # return record
+
+
+    def get_favorites_by_user(self, user_id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                #Run our INSERT
+                result = db.execute(
+                """
+                SELECT id, user_id, rollercoaster_id
+                FROM favorites
+                WHERE user_id = %s
+                """,
+                [user_id]
+                )
+                print("result", result)
+                results = []
+                for row in result.fetchall():
+                    record = {}
                     for i, column in enumerate(db.description):
-                        record[column.name]=id[i]
-                return record
-                
-    # def get_(self, username: str) -> Account:
-    #     #connect the DB
-    #         with pool.connection() as conn:
-    #             with conn.cursor() as db:
-    #             #Run our INSERT
-    #                 result = db.execute(
-    #                 """
-    #                 SELECT 
-    #                     id, username, password, email, first_name, last_name
-    #                 FROM accounts
-    #                 WHERE username = %s;
-    #                 """,
-    #                 [username]
-    #                 )
-    #                 record = result.fetchone()
-    #                 if record is None:
-    #                     return None
-    #                 # old_data = account.dict()
-    #                 # return Account(id=id[0], username=id[1], **old_data)
-    #                 return Account(
-    #                     id=record[0],
-    #                     username=record[1],
-    #                     hashed_password=record[2],
-    #                     email=record[3],
-    #                     first_name=record[4],
-    #                     last_name=record[5],
-    #                     )
-
-    # def record_to_account_out(self, record):
-    #     return AccountOut(
-    #         id=record[0],
-    #         username=record[1],
-    #         first_name=record[2],
-    #         last_name=record[3],
-    #         email=record[4],
-    #         password=record[5],
-    #     )
-
-    # def get_all(self):
-    #     with pool.connection() as conn:
-    #         with conn.cursor() as cur:
-    #             pam = cur.execute(
-    #             """
-    #             SELECT
-    #                 username, password, email, first_name, last_name
-    #             FROM accounts
-    #             """,
-    #             )
-    #             results = []
-    #             for row in pam.fetchall():
-    #                 record = {}
-    #                 for i, column in enumerate(cur.description):
-    #                     record[column.name] = row[i]
-    #                 results.append(record)
-    #             return results
-    def get_favorites_by_username(self):
+                        record[column.name] = row[i]
+                        print("record", record)
+                    results.append(record)
+                return results
 
 
-    def delete_favorite(self):
-
+    def delete_favorite(self, id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                #Run our INSERT
+                db.execute(
+                """
+                DELETE FROM favorites
+                WHERE id = %s
+                """,
+                [id]
+                )
