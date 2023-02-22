@@ -6,15 +6,15 @@ from queries.pool import pool
 class Favorites(BaseModel):
     id:int
     user_id: int
-    rollercoaster_id: str
+    rollercoaster_id: int
 
 class FavoritesIn(BaseModel):
     # user_id: int
-    rollercoaster_id: str
+    rollercoaster_id: int
 
 class FavoritesOut(BaseModel):
     id: int
-    rollercoaster_id: str
+    rollercoaster_id: int
 
 
 class FavoritesRepository:

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from queries.rollercoasters import CoastersQueries, Rollercoaster
+from typing import List
 
 
 router = APIRouter()
@@ -13,6 +14,6 @@ def get_coasters(repo: CoastersQueries= Depends()):
         us_parks = repo.get_us_parks()
         return repo.get_coasters(us_parks)
 
-@router.get('/api/coasters/all')
+@router.get('/api/coasters/all', response_model=List[Rollercoaster])
 def get_coasters(repo: CoastersQueries= Depends()):
         return repo.get_all_coasters()

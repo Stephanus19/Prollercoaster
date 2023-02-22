@@ -1,31 +1,30 @@
 from pydantic import BaseModel
 import requests
+from typing import List, Optional
+import os
 
 
 class Park(BaseModel):
     id: int
     name: str
-    city: str
-    state: str
 
 
 class Rollercoaster(BaseModel):
     id: int
     name: str
-    speed: int
-    height: int
-    inversionsNumber: int
-    # park: Park
+    speed: Optional[int]
+    height: Optional[int]
+    inversionsNumber: Optional[int]
+    park: Park
 
-
-open_weather_api_key = "25f6e7dd098021719c86e4b9b0b46f32"
+open_weather_api_key = os.environ["WEATHER_API_KEY"]
 
 class CoastersQueries:
     def get_us_parks(self):
         us_parks = []
         page_num = 1
         while True:
-            headers = {"X-AUTH-TOKEN":"83a8b6bf-c0b4-436e-8550-4ff79c4b04fd"}
+            headers = {"X-AUTH-TOKEN":os.environ["RC_API_KEY"]}
             response = requests.get(f"https://captaincoaster.com/api/parks?page={page_num}", headers=headers)
             parks_data = response.json().get("hydra:member")
             for park in parks_data:
@@ -51,7 +50,7 @@ class CoastersQueries:
         rollercoasters = []
         page_num = 1
         while True:
-            headers = {"X-AUTH-TOKEN":"83a8b6bf-c0b4-436e-8550-4ff79c4b04fd"}
+            headers = {"X-AUTH-TOKEN":os.environ["RC_API_KEY"]}
             response = requests.get(f"https://captaincoaster.com/api/coasters?page={page_num}", headers=headers)
             data = response.json().get("hydra:member")
             for rc in data:
@@ -67,13 +66,27 @@ class CoastersQueries:
     def get_all_coasters(self):
         rollercoasters = []
         page_num = 1
-        while page_num <= 5:
-            headers = {"X-AUTH-TOKEN":"08749fc6-2aca-483b-8b47-f6e90ce7c0dc"}
-            response = requests.get(f"https://captaincoaster.com/api/coasters?page={page_num}", headers=headers)
+        # while page_num <= 1:
+        #     headers = {"X-AUTH-TOKEN":os.environ["RC_API_KEY"]}
+        #     response = requests.get(f"https://captaincoaster.com/api/coasters?page={page_num}", headers=headers)
+        #     data = response.json().get("hydra:member")
+        #     for rc in data:
+        #         rollercoasters.append(rc)
+        #     # if not response.json().get("hydra:view").get("hydra:next"):
+        #     #     break
+        #     page_num += 1
+        # return rollercoasters
+        while page_num <= 3:
+            headers = {"X-AUTH-TOKEN": os.environ["RC_API_KEY"]}
+            response = requests.get(f"https://captaincoaster.com/api/coasters?page={page_num}&totalRatings[gte]=500", headers=headers)
             data = response.json().get("hydra:member")
             for rc in data:
                 rollercoasters.append(rc)
-            # if not response.json().get("hydra:view").get("hydra:next"):
-            #     break
             page_num += 1
+        for r in rollercoasters:
+            park = r["park"]["@id"]
+            headers = {"X-AUTH-TOKEN": os.environ["RC_API_KEY"]}
+            response = requests.get(f"https://captaincoaster.com{park}", headers=headers)
+            data = response.json()
+            r["park"] = data
         return rollercoasters

@@ -26,6 +26,8 @@ services:
     volumes:
       - ./sample_service:/app
     environment:
+      WEATHER_API_KEY: ${open_weather_api_key}
+      RC_API_KEY: ${RC_KEY}
       SIGNING_KEY: 21251463829B9284AA7316D4D2F6D
       DATABASE_URL: postgresql://rc:password@postgres/postgres-data
       WAIT_HOSTS: postgres:5432
