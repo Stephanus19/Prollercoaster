@@ -5,7 +5,7 @@ from queries.pool import pool
 
 class DuplicateAccountError(ValueError):
     pass
-    
+
 
 
 class Account(BaseModel):
@@ -71,7 +71,7 @@ class AccountRepository:
                 #Run our INSERT
                     result = db.execute(
                     """
-                    SELECT 
+                    SELECT
                         id, username, password, email, first_name, last_name
                     FROM accounts
                     WHERE username = %s;
@@ -119,15 +119,3 @@ class AccountRepository:
                         record[column.name] = row[i]
                     results.append(record)
                 return results
-
-
-
-
-
-    
-
-
-
-
-
-
