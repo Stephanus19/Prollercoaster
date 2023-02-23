@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { showModal, LOG_IN_MODAL, SIGN_UP_MODAL } from "./store/accountSlice";
 // import logo from "./logo.svg";
 import Login from "./LoginModal";
-// import SignUpModal from "./SignUpModal";
+import SignUpModal from "./SignUpModal";
 import { useEffect } from "react";
 
 function LoginButtons(props) {
@@ -14,12 +14,15 @@ function LoginButtons(props) {
 
   return (
     <div className={classNames}>
-      {/* <button
+      <button
         onClick={() => dispatch(showModal(SIGN_UP_MODAL))}
-        className="button is-primary"
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#signupModal"
       >
-        <strong>Sign up</strong>
-      </button> */}
+        <strong>Sign up!</strong>
+      </button>
       <button
         onClick={() => dispatch(showModal(LOG_IN_MODAL))}
         type="button"
@@ -110,7 +113,7 @@ function Nav() {
         </div>
       </nav>
       <Login />
-      {/* <SignUpModal /> */}
+      <SignUpModal />
     </>
   );
 }

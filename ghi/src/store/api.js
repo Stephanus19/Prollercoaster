@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { clearForm } from "./accountSlice";
 
 export const apiSlice = createApi({
   reducerPath: "accounts",
@@ -52,9 +53,31 @@ export const apiSlice = createApi({
       }),
       providesTags: ["Token"],
     }),
+    signUp: builder.mutation({
+      query: (data) => ({
+        url: "/accounts",
+        method: "post",
+        body: data,
+        credentials: "include",
+      }),
+      providesTags: ["Account"],
+      invalidatesTags: (result) => {
+        return (result && ["Token"]) || [];
+      },
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(clearForm());
+        } catch (err) {}
+      },
+    }),
   }),
 });
 
 // hooks that are used in components to make the api calls
-export const { useLoginMutation, useLogoutMutation, useGetTokenQuery } =
-  apiSlice;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useGetTokenQuery,
+  useSignUpMutation,
+} = apiSlice;
