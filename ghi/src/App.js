@@ -5,6 +5,8 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./LoginModal";
 import { useGetTokenQuery } from "./store/api.js";
+import Nav from "./Nav";
+import HomePage from "./HomePage";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -29,14 +31,14 @@ function App() {
     getData();
   }, []);
 
-
   return (
     <div>
       <ErrorNotification error={error} />
       {/* <Construct info={launch_info} /> */}
       <BrowserRouter>
+        <Nav />
         <Routes>
-          <Route path="" element={<Login />} />
+          <Route path="" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
   reducerPath: "accounts",
-  tagTypes: ["Token"],
+  tagTypes: ["Token", "Account"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
     prepareHeaders: (headers, { getState }) => {
@@ -32,8 +32,9 @@ export const apiSlice = createApi({
           credentials: "include",
         };
       },
+      providesTags: ["Account"],
       invalidatesTags: (result) => {
-        return (result && ["Account"]) || [];
+        return (result && ["Token"]) || [];
       },
     }),
     logout: builder.mutation({
