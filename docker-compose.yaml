@@ -1,8 +1,8 @@
 volumes:
-    postgres-data:
-      external: true
-    pg-admin:
-      external: true
+  postgres-data:
+    external: true
+  pg-admin:
+    external: true
 services:
   postgres:
     build:

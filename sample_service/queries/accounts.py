@@ -1,11 +1,11 @@
 from pydantic import BaseModel
-from typing import Optional
 from queries.pool import pool
 
 
 class DuplicateAccountError(ValueError):
     pass
-    
+
+
 class Account(BaseModel):
     id: int
     username: str
@@ -13,6 +13,7 @@ class Account(BaseModel):
     email: str
     first_name: str
     last_name: str
+
 
 class AccountIn(BaseModel):
     username: str
@@ -32,20 +33,20 @@ class AccountOut(BaseModel):
 
 
 class AccountRepository:
-    def create(self, account: AccountIn, hashed_password:str) -> Account:
-        #connect the DB
+    def create(self, account: AccountIn, hashed_password: str) -> Account:
+        # connect the DB
         with pool.connection() as conn:
             with conn.cursor() as db:
-                #Run our INSERT
+                # Run our INSERT
                 result = db.execute(
-                """
-                INSERT INTO accounts
-                    (username, password, email, first_name, last_name)
-                VALUES
-                (%s,%s,%s,%s,%s)
-                RETURNING id;
-                """,
-                [
+                    """
+                    INSERT INTO accounts
+                        (username, password, email, first_name, last_name)
+                    VALUES
+                    (%s,%s,%s,%s,%s)
+                    RETURNING id;
+                    """,
+                    [
                     account.username,
                     hashed_password,
                     account.email,

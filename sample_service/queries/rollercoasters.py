@@ -9,6 +9,10 @@ class Park(BaseModel):
     name: str
 
 
+class MainImage(BaseModel):
+    path: str
+
+
 class Rollercoaster(BaseModel):
     id: int
     name: str
@@ -16,6 +20,8 @@ class Rollercoaster(BaseModel):
     height: Optional[int]
     inversionsNumber: Optional[int]
     park: Park
+    mainImage: MainImage
+
 
 open_weather_api_key = os.environ["WEATHER_API_KEY"]
 
