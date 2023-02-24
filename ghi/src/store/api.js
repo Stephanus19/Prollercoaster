@@ -3,7 +3,7 @@ import { clearForm } from "./accountSlice";
 
 export const apiSlice = createApi({
   reducerPath: "accounts",
-  tagTypes: ["Token", "Account"],
+  tagTypes: ["Token", "Account", "Coasters"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
     prepareHeaders: (headers, { getState }) => {
@@ -71,6 +71,13 @@ export const apiSlice = createApi({
         } catch (err) {}
       },
     }),
+    getRollercoaster: builder.query({
+      query: () => ({
+        url: "/api/coasters/all",
+        credentials: "include",
+      }),
+      providesTags: ["Coasters"],
+    }),
   }),
 });
 
@@ -80,4 +87,5 @@ export const {
   useLogoutMutation,
   useGetTokenQuery,
   useSignUpMutation,
+  useGetRollercoasterQuery,
 } = apiSlice;

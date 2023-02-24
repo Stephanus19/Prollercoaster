@@ -1,5 +1,8 @@
+import { useGetRollercoasterQuery } from "./store/api";
+
 function HomePage() {
-  return <div>hello world</div>;
+  const { data } = useGetRollercoasterQuery();
+  console.log(data);
 }
 
 export default HomePage;
