@@ -82,7 +82,7 @@ class CoastersQueries:
         #     #     break
         #     page_num += 1
         # return rollercoasters
-        while page_num <= 3:
+        while page_num <= 2:
             headers = {"X-AUTH-TOKEN": os.environ["RC_API_KEY"]}
             response = requests.get(f"https://captaincoaster.com/api/coasters?page={page_num}&totalRatings[gte]=500", headers=headers)
             data = response.json().get("hydra:member")
