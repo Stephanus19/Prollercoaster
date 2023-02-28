@@ -3,6 +3,7 @@ import { useGetRollercoasterQuery, useAddFavoriteMutation } from "./store/api";
 import { preventDefault, eventTargetSelector as target } from "./store/utils";
 import { useDispatch } from "react-redux";
 import AddFavorite from "./AddFavorite";
+import ShowFavorites from "./FavoritesOffCanvas";
 
 function Column(props) {
   return (
@@ -79,14 +80,9 @@ function HomePage() {
   };
   y();
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault(addFavorite, target);
-  //   // const { rollercoaster_id } = e.target.elements;
-  //   addFavorite({ rollercoaster_id: e.target.value });
-  // };
-
   return (
     // KEEP THIS RETURN STATEMENT - uses columns loop
+
     <>
       <div className="container">
         <div className="row row-cols-1 row-cols-md-3 g-5">
@@ -195,4 +191,32 @@ function HomePage() {
 //     </>
 //   );
 // }
+<>
+  {/* <div class="offcanvas offcanvas-start" id="demo">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title">Heading</h1>
+      <button
+        type="button"
+        class="btn-close text-reset"
+        data-bs-dismiss="offcanvas"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>Some text lorem ipsum.</p>
+      <p>Some text lorem ipsum.</p>
+      <button class="btn btn-secondary" type="button">
+        A Button
+      </button>
+    </div>
+  </div> */}
+
+  {/* <button
+    class="btn btn-primary"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#demo"
+  >
+    Open Offcanvas Sidebar
+  </button> */}
+</>;
 export default HomePage;

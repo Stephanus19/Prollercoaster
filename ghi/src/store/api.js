@@ -114,4 +114,5 @@ export const {
   useSignUpMutation,
   useGetRollercoasterQuery,
   useAddFavoriteMutation,
+  useGetFavoritesQuery,
 } = apiSlice;

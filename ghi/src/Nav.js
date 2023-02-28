@@ -7,6 +7,7 @@ import { showModal, LOG_IN_MODAL, SIGN_UP_MODAL } from "./store/accountSlice";
 import Login from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import { useEffect } from "react";
+import ShowFavorites from "./FavoritesOffCanvas";
 
 function LoginButtons(props) {
   const dispatch = useDispatch();
@@ -55,6 +56,25 @@ function LogoutButton() {
   );
 }
 
+// function ShowFavorites() {
+//   // const dispatch = useDispatch();
+
+//   return (
+//     <div className="buttons">
+//       <button
+//         onClick={ShowFavorites()}
+//         className="btn btn-danger"
+//         type="button"
+//         data-bs-toggle="offcanvas"
+//         data-bs-target="#demo"
+//       >
+//         Favorites List
+//       </button>
+//     </div>
+//   );
+// }
+// console.log(typeof ShowFavorites);
+
 function Nav() {
   const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
   console.log(token);
@@ -64,9 +84,9 @@ function Nav() {
 
   return (
     <>
+      <ShowFavorites />
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
-          
           {/* <NavLink className="navbar-item" to="/">
             <img src={logo} height="86" width="43" alt="" />
           </NavLink> */}
@@ -99,6 +119,7 @@ function Nav() {
                 token ? (
                   <>
                     <LogoutButton />
+                    {/* <ShowFavorites /> */}
                   </>
                 ) : (
                   <LoginButtons show={true} />
