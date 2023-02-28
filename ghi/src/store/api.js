@@ -85,8 +85,6 @@ export const apiSlice = createApi({
 
     addFavorite: builder.mutation({
       query: (data) => {
-        // const formData = new FormData(data);
-        // formData.append("rollercoaster_id", data.rollercoaster_id);
         return {
           method: "post",
           url: "/favorites",
@@ -103,6 +101,16 @@ export const apiSlice = createApi({
       }),
       providesTags: ["Favorites"],
     }),
+
+    deleteFavorite: builder.mutation({
+      query: (rollercoasterId) => {
+        return {
+          method: "delete",
+          url: `/favorites?rollercoaster_id=${rollercoasterId}`,
+        };
+      },
+      invalidatesTags: ["Favorites"],
+    }),
   }),
 });
 
@@ -115,4 +123,5 @@ export const {
   useGetRollercoasterQuery,
   useAddFavoriteMutation,
   useGetFavoritesQuery,
+  useDeleteFavoriteMutation,
 } = apiSlice;

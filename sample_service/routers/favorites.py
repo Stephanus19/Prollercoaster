@@ -23,9 +23,9 @@ def get_favorite_by_user(
     return repo.get_favorites_by_user(user_id = account_data["id"])
 
 
-@router.delete("/favorites/{id}")
+@router.delete("/favorites")
 def delete_favorite(
-    id: int,
+    rollercoaster_id: int,
     repo: FavoritesRepository = Depends(),
 ):
-    return repo.delete_favorite(id)
+    return repo.delete_favorite(rollercoaster_id)

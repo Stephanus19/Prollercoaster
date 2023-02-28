@@ -33,7 +33,7 @@ function Column(props) {
                   {rollercoasters.inversionsNumber}
                 </li>
                 <li key={rollercoasters.park.name}>
-                  {rollercoasters.park.name}
+                  Park: {rollercoasters.park.name}
                 </li>
                 <AddFavorite rollercoasterId={rollercoasters.id} />
               </p>

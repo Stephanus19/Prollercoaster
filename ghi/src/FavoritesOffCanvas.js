@@ -1,11 +1,16 @@
-import { useGetFavoritesQuery } from "./store/api";
+import { useDeleteFavoriteMutation, useGetFavoritesQuery } from "./store/api";
 import { useGetRollercoasterQuery } from "./store/api";
+import DeleteFavorite from "./DeleteFavorite";
 
 function ShowFavorites() {
   const { data: coasterList, isLoading } = useGetRollercoasterQuery(); //Fetching?
   const { data: favoritesList, isFetching } = useGetFavoritesQuery();
 
-  const theList = favoritesList.map((favorite) => favorite.rollercoaster_id);
+  if (isFetching || isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const theList = favoritesList?.map((favorite) => favorite.rollercoaster_id);
   const favoritedCoasters = coasterList.filter((coasterItem) =>
     theList.includes(coasterItem.id)
   );
@@ -42,7 +47,7 @@ function ShowFavorites() {
         </div>
         <div className="offcanvas-body">
           <div>
-            {favoritedCoasters.map((favorites) => {
+            {favoritedCoasters?.map((favorites) => {
               return (
                 <div className="card h-10 m-3" style={{ width: "18rem" }}>
                   <img
@@ -57,11 +62,13 @@ function ShowFavorites() {
                       <li key={favorites.speed}>Speed: {favorites.speed}</li>
                       <li key={favorites.height}>Height: {favorites.height}</li>
                       <li key={favorites.inversionsNumber}>
-                        {" "}
                         Inversions:
                         {favorites.inversionsNumber}
                       </li>
-                      <li key={favorites.park.name}>{favorites.park.name}</li>
+                      <li key={favorites.park.name}>
+                        Park: {favorites.park.name}
+                      </li>
+                      <DeleteFavorite rollercoasterId={favorites.id} />
                     </p>
                   </div>
                 </div>

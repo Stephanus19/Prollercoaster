@@ -70,14 +70,14 @@ class FavoritesRepository:
                 return results
 
 
-    def delete_favorite(self, id: int):
+    def delete_favorite(self, rollercoaster_id: int):
         with pool.connection() as conn:
             with conn.cursor() as db:
                 #Run our INSERT
                 db.execute(
                 """
                 DELETE FROM favorites
-                WHERE id = %s
+                WHERE rollercoaster_id = %s
                 """,
-                [id]
+                [rollercoaster_id]
                 )
