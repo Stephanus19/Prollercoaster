@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useGetRollercoasterQuery, useAddFavoriteMutation } from "./store/api";
 import { preventDefault, eventTargetSelector as target } from "./store/utils";
 import { useDispatch } from "react-redux";
+import AddFavorite from "./AddFavorite";
 
 function Column(props) {
   return (
@@ -33,6 +34,7 @@ function Column(props) {
                 <li key={rollercoasters.park.name}>
                   {rollercoasters.park.name}
                 </li>
+                <AddFavorite rollercoasterId={rollercoasters.id} />
               </p>
               {/* <form
                 method="post"
@@ -40,13 +42,9 @@ function Column(props) {
                 onSubmit={() => dispatch(addFavorite(rollercoasters.id))}
                 // value={rollercoasters.id}
               > */}
-              <button
-                onClick={() =>
-                  useDispatch(props.favorites.addFavorite(rollercoasters.id))
-                }
-              >
+              {/* <button onClick={() => handleAddFavorite(rollercoasters.id)}>
                 Add to Favorites
-              </button>
+              </button> */}
               {/* </form> */}
             </div>
           </div>
@@ -59,7 +57,7 @@ function Column(props) {
 
 function HomePage() {
   const { data: coasterList, isFetching } = useGetRollercoasterQuery();
-  const [addFavorite, { data }] = useAddFavoriteMutation();
+  // const [addFavorite, { data }] = useAddFavoriteMutation();
   // skip: true,
   // selectFromResult: (result) => result.data,
 
@@ -87,14 +85,13 @@ function HomePage() {
   //   addFavorite({ rollercoaster_id: e.target.value });
   // };
 
-
   return (
     // KEEP THIS RETURN STATEMENT - uses columns loop
     <>
       <div className="container">
         <div className="row row-cols-1 row-cols-md-3 g-5">
           {columns.map((coasterList) => {
-            return <Column list={coasterList} favorites={addFavorite} />;
+            return <Column list={coasterList} />;
           })}
         </div>
       </div>
@@ -102,53 +99,48 @@ function HomePage() {
   );
 }
 
-
-
-
-
-
-  // return (
-  //   <>
-  //     <div className="container">
-  //       <div className="row row-cols-1 row-cols-md-3 g-4">
-  //         <div className="col">
-  //           {coasterList.map((rollercoasters) => {
-  //             return (
-  //               <div className="card h-10" style={{ width: "18rem" }}>
-  //                 <img
-  //                   src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
-  //                   className="card-img-top img-thumbnail "
-  //                   alt="rollercoaster"
-  //                 />
-  //                 <div className="card-body">
-  //                   <p className="card-text">
-  //                     <li key={rollercoasters.name}>
-  //                       Name: {rollercoasters.name}
-  //                     </li>
-  //                     <li key={rollercoasters.speed}>
-  //                       Speed: {rollercoasters.speed}
-  //                     </li>
-  //                     <li key={rollercoasters.height}>
-  //                       Height: {rollercoasters.height}
-  //                     </li>
-  //                     <li key={rollercoasters.inversionsNumber}>
-  //                       {" "}
-  //                       Inversions:
-  //                       {rollercoasters.inversionsNumber}
-  //                     </li>
-  //                     <li key={rollercoasters.park.name}>
-  //                       {rollercoasters.park.name}
-  //                     </li>
-  //                   </p>
-  //                 </div>
-  //               </div>
-  //             );
-  //           })}
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </>
-  // );
+// return (
+//   <>
+//     <div className="container">
+//       <div className="row row-cols-1 row-cols-md-3 g-4">
+//         <div className="col">
+//           {coasterList.map((rollercoasters) => {
+//             return (
+//               <div className="card h-10" style={{ width: "18rem" }}>
+//                 <img
+//                   src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
+//                   className="card-img-top img-thumbnail "
+//                   alt="rollercoaster"
+//                 />
+//                 <div className="card-body">
+//                   <p className="card-text">
+//                     <li key={rollercoasters.name}>
+//                       Name: {rollercoasters.name}
+//                     </li>
+//                     <li key={rollercoasters.speed}>
+//                       Speed: {rollercoasters.speed}
+//                     </li>
+//                     <li key={rollercoasters.height}>
+//                       Height: {rollercoasters.height}
+//                     </li>
+//                     <li key={rollercoasters.inversionsNumber}>
+//                       {" "}
+//                       Inversions:
+//                       {rollercoasters.inversionsNumber}
+//                     </li>
+//                     <li key={rollercoasters.park.name}>
+//                       {rollercoasters.park.name}
+//                     </li>
+//                   </p>
+//                 </div>
+//               </div>
+//             );
+//           })}
+//         </div>
+//       </div>
+//     </div>
+//   </>
+// );
 
 // return (
 //   <div className="container">
