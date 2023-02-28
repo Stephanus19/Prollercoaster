@@ -64,16 +64,12 @@ function Nav() {
 
   return (
     <>
-      <nav
-        className="navbar is-link is-fixed-top"
-        role="navigation"
-        aria-label="main navigation"
-      >
-        <div className="navbar-brand">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container">
+          
           {/* <NavLink className="navbar-item" to="/">
             <img src={logo} height="86" width="43" alt="" />
           </NavLink> */}
-
           {/* <button
             className="navbar-burger"
             aria-label="menu"

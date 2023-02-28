@@ -3,7 +3,6 @@ import { clearForm } from "./accountSlice";
 
 export const apiSlice = createApi({
   reducerPath: "accounts",
-  tagTypes: ["Token", "Account", "Coasters"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
     prepareHeaders: (headers, { getState }) => {
@@ -15,6 +14,8 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Token", "Account", "Coasters", "Favorites"],
+
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (info) => {
@@ -38,6 +39,7 @@ export const apiSlice = createApi({
         return (result && ["Token"]) || [];
       },
     }),
+
     logout: builder.mutation({
       query: () => ({
         url: "/token",
@@ -46,6 +48,7 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Account", "Token"],
     }),
+
     getToken: builder.query({
       query: () => ({
         url: "/token",
@@ -53,6 +56,7 @@ export const apiSlice = createApi({
       }),
       providesTags: ["Token"],
     }),
+
     signUp: builder.mutation({
       query: (data) => ({
         url: "/accounts",
@@ -71,12 +75,33 @@ export const apiSlice = createApi({
         } catch (err) {}
       },
     }),
+
     getRollercoaster: builder.query({
       query: () => ({
         url: "/api/coasters/all",
-        credentials: "include",
       }),
       providesTags: ["Coasters"],
+    }),
+
+    addFavorite: builder.mutation({
+      query: (data) => {
+        // const formData = new FormData(data);
+        // formData.append("rollercoaster_id", data.rollercoaster_id);
+        return {
+          method: "post",
+          url: "/favorites",
+          body: data,
+        };
+      },
+      invalidatesTags: ["Favorites"],
+    }),
+
+    getFavorites: builder.query({
+      query: () => ({
+        url: "/favorites",
+        credentials: "include",
+      }),
+      providesTags: ["Favorites"],
     }),
   }),
 });
@@ -88,4 +113,5 @@ export const {
   useGetTokenQuery,
   useSignUpMutation,
   useGetRollercoasterQuery,
+  useAddFavoriteMutation,
 } = apiSlice;

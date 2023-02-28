@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { useGetRollercoasterQuery } from "./store/api";
+import { useGetRollercoasterQuery, useAddFavoriteMutation } from "./store/api";
+import { preventDefault, eventTargetSelector as target } from "./store/utils";
+import { useDispatch } from "react-redux";
 
 function Column(props) {
   return (
@@ -15,7 +17,7 @@ function Column(props) {
               alt="rollercoaster"
             />
             <div className="card-body">
-              <h5 class="card-title">{rollercoasters.name}</h5>
+              <h5 className="card-title">{rollercoasters.name}</h5>
               <p className="card-text">
                 <li key={rollercoasters.speed}>
                   Speed: {rollercoasters.speed}
@@ -32,6 +34,20 @@ function Column(props) {
                   {rollercoasters.park.name}
                 </li>
               </p>
+              {/* <form
+                method="post"
+                action="/"
+                onSubmit={() => dispatch(addFavorite(rollercoasters.id))}
+                // value={rollercoasters.id}
+              > */}
+              <button
+                onClick={() =>
+                  useDispatch(props.favorites.addFavorite(rollercoasters.id))
+                }
+              >
+                Add to Favorites
+              </button>
+              {/* </form> */}
             </div>
           </div>
         );
@@ -43,6 +59,7 @@ function Column(props) {
 
 function HomePage() {
   const { data: coasterList, isFetching } = useGetRollercoasterQuery();
+  const [addFavorite, { data }] = useAddFavoriteMutation();
   // skip: true,
   // selectFromResult: (result) => result.data,
 
@@ -63,6 +80,31 @@ function HomePage() {
     }
   };
   y();
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault(addFavorite, target);
+  //   // const { rollercoaster_id } = e.target.elements;
+  //   addFavorite({ rollercoaster_id: e.target.value });
+  // };
+
+
+  return (
+    // KEEP THIS RETURN STATEMENT - uses columns loop
+    <>
+      <div className="container">
+        <div className="row row-cols-1 row-cols-md-3 g-5">
+          {columns.map((coasterList) => {
+            return <Column list={coasterList} favorites={addFavorite} />;
+          })}
+        </div>
+      </div>
+    </>
+  );
+}
+
+
+
+
 
 
   // return (
@@ -107,20 +149,6 @@ function HomePage() {
   //     </div>
   //   </>
   // );
-
-  return (
-    // KEEP THIS RETURN STATEMENT - uses columns loop
-    <>
-      <div className="container">
-        <div className="row row-cols-1 row-cols-md-3 g-5">
-          {columns.map((coasterList) => {
-            return <Column list={coasterList} />;
-          })}
-        </div>
-      </div>
-    </>
-  );
-}
 
 // return (
 //   <div className="container">

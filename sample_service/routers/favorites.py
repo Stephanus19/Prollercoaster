@@ -14,7 +14,7 @@ def create_favorite(
     return repo.create(info, user_id = account_data["id"])
 
 
-@router.get("/favorites/{user_id}")
+@router.get("/favorites")
 def get_favorite_by_user(
     # user_id: int,
     repo: FavoritesRepository = Depends(),
