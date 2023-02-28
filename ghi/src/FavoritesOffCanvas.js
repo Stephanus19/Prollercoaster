@@ -5,8 +5,11 @@ function ShowFavorites() {
   const { data: coasterList, isLoading } = useGetRollercoasterQuery(); //Fetching?
   const { data: favoritesList, isFetching } = useGetFavoritesQuery();
 
-  //   const favorites = favoritesList.map((favorite) => favorite.rollercoaster_id);
-  //   console.log(favorites);
+  const theList = favoritesList.map((favorite) => favorite.rollercoaster_id);
+  const favoritedCoasters = coasterList.filter((coasterItem) =>
+    theList.includes(coasterItem.id)
+  );
+  console.log(theList);
 
   return (
     <>
@@ -39,14 +42,31 @@ function ShowFavorites() {
         </div>
         <div className="offcanvas-body">
           <div>
-            {favoritesList.map((favorites) => {
+            {favoritedCoasters.map((favorites) => {
               return (
-                <ul>
-                  <li>{favorites.rollercoaster_id}</li>
-                </ul>
+                <div className="card h-10 m-3" style={{ width: "18rem" }}>
+                  <img
+                    src={`https://captaincoaster.com/images/coasters/${favorites.mainImage.path}`}
+                    className="card-img-top"
+                    style={{ height: "15rem" }}
+                    alt=""
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{favorites.name}</h5>
+                    <p className="card-text">
+                      <li key={favorites.speed}>Speed: {favorites.speed}</li>
+                      <li key={favorites.height}>Height: {favorites.height}</li>
+                      <li key={favorites.inversionsNumber}>
+                        {" "}
+                        Inversions:
+                        {favorites.inversionsNumber}
+                      </li>
+                      <li key={favorites.park.name}>{favorites.park.name}</li>
+                    </p>
+                  </div>
+                </div>
               );
             })}
-            ;
           </div>
           {/* <div className="dropdown mt-3">
             <button
