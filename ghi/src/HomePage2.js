@@ -58,7 +58,6 @@ function Column(props) {
 
 function HomePage() {
   const { data: coasterList, isFetching } = useGetRollercoasterQuery();
-  const [filter, setFilter] = useState("");
   // const [addFavorite, { data }] = useAddFavoriteMutation();
   // skip: true,
   // selectFromResult: (result) => result.data,
@@ -67,23 +66,10 @@ function HomePage() {
     return <div>Loading...</div>;
   }
 
-     const sortedCoasters = [...coasterList].sort((a, b) => {
-        if (filter === "speed") {
-          if (a.speed && b.speed) {
-            return (
-            b.speed - a.speed)}}
-        if (filter === "") {
-          return (
-            coasterList
-          )
-        }
-}
-    )
-
-  const columns = [[], [], [],];
+  const columns = [[], [], []];
   const y = () => {
     let i = 0;
-    for (let rc of sortedCoasters) {
+    for (let rc of coasterList) {
       console.log(rc);
       columns[i].push(rc);
       i++;
@@ -99,10 +85,9 @@ function HomePage() {
 
     <>
       <div className="container">
-        <button type="button" class="btn btn-primary" onClick={() => setFilter("speed")}>Speed</button>
         <div className="row row-cols-1 row-cols-md-3 g-5">
-          {columns.map((sortedCoasters) => {
-            return <Column list={sortedCoasters} />;
+          {columns.map((coasterList) => {
+            return <Column list={coasterList} />;
           })}
         </div>
       </div>

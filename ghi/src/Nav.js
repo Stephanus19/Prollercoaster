@@ -108,9 +108,9 @@ function Nav() {
         </nav>
         <Login />
         <SignUpModal />
-        {/* {token ? ( */}
+        {token ? (
         <ShowFavorites />
-        {/* ) : ("Login to see favorites.")} */}
+        ) : ("Login to see favorites.")}
     </>
   );
 }
