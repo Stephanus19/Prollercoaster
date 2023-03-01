@@ -11,7 +11,7 @@ function ShowFavorites() {
   }
 
   const theList = favoritesList?.map((favorite) => favorite.rollercoaster_id);
-  const favoritedCoasters = coasterList.filter((coasterItem) =>
+  const favoritedCoasters = coasterList?.filter((coasterItem) =>
     theList.includes(coasterItem.id)
   );
   console.log(theList);

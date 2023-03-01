@@ -84,7 +84,9 @@ function Nav() {
 
   return (
     <>
+    {token ? (
       <ShowFavorites />
+      ) : ("Login to see favorites.")}
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           {/* <NavLink className="navbar-item" to="/">
