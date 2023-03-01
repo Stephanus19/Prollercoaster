@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import AddFavorite from "./AddFavorite";
 import ShowFavorites from "./FavoritesOffCanvas";
 
-function Column(props) {
+function Card(props) {
   return (
     // <div className="col">
     <>
@@ -72,6 +72,12 @@ function HomePage() {
           if (a.speed && b.speed) {
             return (
             b.speed - a.speed)}}
+        if (filter === "height") {
+            return (
+            b.height - a.height)}
+        if (filter === "inversionsNumber") {
+            return (
+            b.inversionsNumber - a.inversionsNumber)}
         if (filter === "") {
           return (
             coasterList
@@ -80,14 +86,14 @@ function HomePage() {
 }
     )
 
-  const columns = [[], [], [],];
+  const columns = [[],];
   const y = () => {
     let i = 0;
     for (let rc of sortedCoasters) {
       console.log(rc);
       columns[i].push(rc);
       i++;
-      if (i > 2) {
+      if (i > 0) {
         i = 0;
       }
     }
@@ -100,9 +106,11 @@ function HomePage() {
     <>
       <div className="container">
         <button type="button" class="btn btn-primary" onClick={() => setFilter("speed")}>Speed</button>
+        <button type="button" class="btn btn-primary" onClick={() => setFilter("height")}>Height</button>
+        <button type="button" class="btn btn-primary" onClick={() => setFilter("inversionsNumber")}>Inversions</button>
         <div className="row row-cols-1 row-cols-md-3 g-5">
           {columns.map((sortedCoasters) => {
-            return <Column list={sortedCoasters} />;
+            return <Card list={sortedCoasters} />;
           })}
         </div>
       </div>
@@ -114,6 +122,7 @@ function HomePage() {
 //   <>
 //     <div className="container">
 //       <div className="row row-cols-1 row-cols-md-3 g-4">
+
 //         <div className="col">
 //           {coasterList.map((rollercoasters) => {
 //             return (
