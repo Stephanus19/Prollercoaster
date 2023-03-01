@@ -37,9 +37,11 @@ function App() {
       {/* <Construct info={launch_info} /> */}
       <BrowserRouter>
         <Nav />
+        <div className="container">
         <Routes>
           <Route path="" element={<HomePage />} />
         </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

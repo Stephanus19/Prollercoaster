@@ -56,24 +56,20 @@ function LogoutButton() {
   );
 }
 
-// function ShowFavorites() {
-//   // const dispatch = useDispatch();
+function FavoritesButton(props) {
 
-//   return (
-//     <div className="buttons">
-//       <button
-//         onClick={ShowFavorites()}
-//         className="btn btn-danger"
-//         type="button"
-//         data-bs-toggle="offcanvas"
-//         data-bs-target="#demo"
-//       >
-//         Favorites List
-//       </button>
-//     </div>
-//   );
-// }
-// console.log(typeof ShowFavorites);
+  return (
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasExample"
+        aria-controls="offcanvasExample"
+      >
+        Favorite List
+      </button>
+  );
+}
 
 function Nav() {
   const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
@@ -84,36 +80,13 @@ function Nav() {
 
   return (
     <>
-    {token ? (
+    {/* {token ? (
       <ShowFavorites />
-      ) : ("Login to see favorites.")}
+      ) : ("Login to see favorites.")} */}
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container">
-          {/* <NavLink className="navbar-item" to="/">
-            <img src={logo} height="86" width="43" alt="" />
-          </NavLink> */}
-          {/* <button
-            className="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </button> */}
-        </div>
+        <div className="container-fluid">
+          <div className="row bottom-buffer">
         <div id="navbarBasicExample" className="navbar-menu">
-          {/* <div className="navbar-start">
-            <NavLink className="navbar-item" to="/">Tiny Library</NavLink>
-            {roles.includes('librarian')
-              ? <>
-                <NavLink className="navbar-item" to="manage-books/new">
-                  Add books
-                </NavLink>
-              </>
-              : ''}
-          </div> */}
           <div className="navbar-end">
             <div className="navbar-item">
               {
@@ -121,7 +94,7 @@ function Nav() {
                 token ? (
                   <>
                     <LogoutButton />
-                    {/* <ShowFavorites /> */}
+                    <FavoritesButton />
                   </>
                 ) : (
                   <LoginButtons show={true} />
@@ -129,10 +102,15 @@ function Nav() {
               }
             </div>
           </div>
-        </div>
-      </nav>
-      <Login />
-      <SignUpModal />
+          </div>
+          </div>
+          </div>
+        </nav>
+        <Login />
+        <SignUpModal />
+        {/* {token ? ( */}
+        <ShowFavorites />
+        {/* ) : ("Login to see favorites.")} */}
     </>
   );
 }

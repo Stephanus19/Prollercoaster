@@ -11,7 +11,7 @@ function Column(props) {
     <>
       {props.list.map((rollercoasters) => {
         return (
-          <div className="card h-10 m-3" style={{ width: "18rem" }}>
+          <div className="card h-10 mb-3 mx-3" style={{ width: "18rem" }}>
             <img
               src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
               className="card-img-top"

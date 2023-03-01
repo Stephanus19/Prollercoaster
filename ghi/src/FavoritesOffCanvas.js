@@ -18,7 +18,7 @@ function ShowFavorites() {
 
   return (
     <>
-      <button
+      {/* <button
         className="btn btn-primary"
         type="button"
         data-bs-toggle="offcanvas"
@@ -26,7 +26,7 @@ function ShowFavorites() {
         aria-controls="offcanvasExample"
       >
         Favorites List
-      </button>
+      </button> */}
 
       <div
         className="offcanvas offcanvas-start"
