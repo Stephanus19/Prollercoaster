@@ -236,18 +236,20 @@ function SignUpModal() {
                 </div>
               </div>
               <div className="modal-footer">
-                <button
+                {/* <button
                   type="button"
                   onClick={() => dispatch(showModal(null))}
                   className="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Close
-                </button>
+                </button> */}
                 <button
+                  onClick={() => dispatch(showModal(null))}
                   disabled={signUpLoading}
                   type="submit"
                   className="btn btn-primary"
+                  data-bs-dismiss="modal"
                 >
                   Sign Up
                 </button>

@@ -2,11 +2,11 @@ import { NavLink } from "react-router-dom";
 import { useGetTokenQuery, useLogoutMutation } from "./store/api";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { showModal, LOG_IN_MODAL, SIGN_UP_MODAL } from "./store/accountSlice";
+import { showModal, LOG_IN_MODAL, SIGN_UP_MODAL, accountSlice, Context } from "./store/accountSlice";
 // import logo from "./logo.svg";
 import Login from "./LoginModal";
 import SignUpModal from "./SignUpModal";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import ShowFavorites from "./FavoritesOffCanvas";
 
 function LoginButtons(props) {
@@ -40,11 +40,15 @@ function LoginButtons(props) {
 function LogoutButton() {
   const navigate = useNavigate();
   const [logout, { data }] = useLogoutMutation();
+  // const [state] = useContext(Context)
+  {/* working on line above */}
 
   useEffect(() => {
     if (data) {
       navigate("/");
     }
+    // console.log("logoutbutton funciton", logout)
+    {/* working on line above */}  
   }, [data, navigate]);
 
   return (
@@ -52,6 +56,7 @@ function LogoutButton() {
       <button onClick={logout} className="button is-light">
         Logout
       </button>
+      {/* <div>{accountSlice.state["username"]}</div>   working on this line  */}
     </div>
   );
 }
@@ -95,7 +100,10 @@ function Nav() {
                   <>
                     <LogoutButton />
                     <FavoritesButton />
+                    Welcome {token.account.username}!
+                    {/* {accountSlice.action.payload.account.username} working on this */}
                   </>
+                  
                 ) : (
                   <LoginButtons show={true} />
                 )

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+//import { createContext } from "react";
 
 const initialState = {
   show: null,
@@ -8,6 +9,8 @@ const initialState = {
   first_name: "",
   last_name: "",
 };
+
+//export const Context = createContext(initialState) //added this line
 
 export const accountSlice = createSlice({
   name: "account",
@@ -23,7 +26,7 @@ export const accountSlice = createSlice({
       return initialState;
     },
   },
-});
+}, ); //added initialstate
 
 export const { clearForm, updateField, showModal } = accountSlice.actions;
 
