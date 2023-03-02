@@ -37,7 +37,7 @@ about your project that you create and to put your
 project-journal entries. See the _README.md_ file in each
 directory for more info.
 
-The other directories, `ghi` and `sample_service`, are
+The other directories, `ghi` and `rollercoaster_service`, are
 sample services, that you can start building off of or use
 as a reference point.
 
@@ -45,7 +45,7 @@ Inside of `ghi` is a minimal React app that has an "under
 construction" page. It is setup similarly to all of the
 other React projects that you have worked on.
 
-Inside of `sample_service` is a minimal FastAPI application.
+Inside of `rollercoaster_service` is a minimal FastAPI application.
 "Where are all the files?" you might ask? Well, the
 `main.py` file is the whole thing, and go take look inside
 of it... There's not even much in there..., hmm? That is
@@ -53,7 +53,7 @@ FastAPI, we'll learn more about it in the coming days. Can
 you figure out what this little web-application does even
 though you haven't learned about FastAPI yet?
 
-Also in `sample_service` is a directory for your migrations.
+Also in `rollercoaster_service` is a directory for your migrations.
 If you choose to use PostgreSQL, then you'll want to use
 migrations to control your database. Unlike Django, where
 migrations were automatically created for you, you'll write

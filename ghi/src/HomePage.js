@@ -20,38 +20,28 @@ function Card(props) {
             />
             <div className="card-body">
               <h5 className="card-title">{rollercoasters.name}</h5>
-              <p className="card-text">
-                <li key={rollercoasters.speed}>
-                  Speed: {rollercoasters.speed}
-                </li>
-                <li key={rollercoasters.height}>
-                  Height: {rollercoasters.height}
-                </li>
-                <li key={rollercoasters.inversionsNumber}>
+              <h6 className="card-title">{rollercoasters.park.name}</h6>
+              <div className="card-text">
+                <div key={rollercoasters.speed}>
+                  <em>Speed:</em> {rollercoasters.speed}
+                </div>
+                <div key={rollercoasters.height}>
+                  <em>Height:</em> {rollercoasters.height}
+                </div>
+                <div key={rollercoasters.inversionsNumber}>
                   {" "}
-                  Inversions:
+                  <em>Inversions:</em>
                   {rollercoasters.inversionsNumber}
-                </li>
-                <li key={rollercoasters.park.name}>
+                </div>
+                {/* <div key={rollercoasters.park.name}>
                   Park: {rollercoasters.park.name}
-                </li>
+                </div> */}
                 <AddFavorite rollercoasterId={rollercoasters.id} />
-              </p>
-              {/* <form
-                method="post"
-                action="/"
-                onSubmit={() => dispatch(addFavorite(rollercoasters.id))}
-                // value={rollercoasters.id}
-              > */}
-              {/* <button onClick={() => handleAddFavorite(rollercoasters.id)}>
-                Add to Favorites
-              </button> */}
-              {/* </form> */}
+              </div>
             </div>
           </div>
         );
       })}
-      {/* // </div> */}
     </>
   );
 }
@@ -83,8 +73,19 @@ function HomePage() {
             coasterList
           )
         }
-}
-    )
+        if (filter === "A-Z"){
+          const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+          const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        }
+    })
+
 
   const columns = [[],];
   const y = () => {
@@ -104,16 +105,27 @@ function HomePage() {
     // KEEP THIS RETURN STATEMENT - uses columns loop
 
     <>
+    <div className="subnav">
+		<div className="subnav__container">
+			<div className="subnav__title">
       <div className="container">
         <button type="button" class="btn btn-primary" onClick={() => setFilter("speed")}>Speed</button>
         <button type="button" class="btn btn-primary" onClick={() => setFilter("height")}>Height</button>
         <button type="button" class="btn btn-primary" onClick={() => setFilter("inversionsNumber")}>Inversions</button>
-        <div className="row row-cols-1 row-cols-md-3 g-5">
-          {columns.map((sortedCoasters) => {
-            return <Card list={sortedCoasters} />;
-          })}
+        <button type="button" class="btn btn-primary" onClick={() => setFilter("A-Z")}>A-Z</button>
         </div>
       </div>
+      </div>
+		</div>
+    <section className="section">
+    <div className="row row-cols-1 row-cols-md-3 g-5">
+      {columns.map((sortedCoasters) => {
+        return(
+        <Card list={sortedCoasters} />
+        )
+      })}
+    </div>
+    </section>
     </>
   );
 }
@@ -133,25 +145,25 @@ function HomePage() {
 //                   alt="rollercoaster"
 //                 />
 //                 <div className="card-body">
-//                   <p className="card-text">
-//                     <li key={rollercoasters.name}>
+//                   <div className="card-text">
+//                     <div key={rollercoasters.name}>
 //                       Name: {rollercoasters.name}
-//                     </li>
-//                     <li key={rollercoasters.speed}>
+//                     </div>
+//                     <div key={rollercoasters.speed}>
 //                       Speed: {rollercoasters.speed}
-//                     </li>
-//                     <li key={rollercoasters.height}>
+//                     </div>
+//                     <div key={rollercoasters.height}>
 //                       Height: {rollercoasters.height}
-//                     </li>
-//                     <li key={rollercoasters.inversionsNumber}>
+//                     </div>
+//                     <div key={rollercoasters.inversionsNumber}>
 //                       {" "}
 //                       Inversions:
 //                       {rollercoasters.inversionsNumber}
-//                     </li>
-//                     <li key={rollercoasters.park.name}>
+//                     </div>
+//                     <div key={rollercoasters.park.name}>
 //                       {rollercoasters.park.name}
-//                     </li>
-//                   </p>
+//                     </div>
+//                   </div>
 //                 </div>
 //               </div>
 //             );
@@ -184,30 +196,30 @@ function HomePage() {
 //               alt="rollercoaster"
 //             />
 //             <div className="card-body">
-//               <p className="card-text">
+//               <div className="card-text">
 //                 Some quick example text to build on the card title and make up
 //                 the bulk of the card's content.
-//                 <li key={rollercoasters.name}>Name: {rollercoasters.name}</li>
-//                 <li key={rollercoasters.speed}>
+//                 <div key={rollercoasters.name}>Name: {rollercoasters.name}</div>
+//                 <div key={rollercoasters.speed}>
 //                   Speed: {rollercoasters.speed}
-//                 </li>
-//                 <li key={rollercoasters.height}>
+//                 </div>
+//                 <div key={rollercoasters.height}>
 //                   Height: {rollercoasters.height}
-//                 </li>
-//                 <li key={rollercoasters.inversionsNumber}>
+//                 </div>
+//                 <div key={rollercoasters.inversionsNumber}>
 //                   {" "}
 //                   Inversions:
 //                   {rollercoasters.inversionsNumber}
-//                 </li>
-//                 <li key={rollercoasters.park.name}>
+//                 </div>
+//                 <div key={rollercoasters.park.name}>
 //                   {rollercoasters.park.name}
-//                 </li>
-//               </p>
-//               {/* <li key={rollercoasters.id}>
+//                 </div>
+//               </div>
+//               {/* <div key={rollercoasters.id}>
 //               <img
 //                 src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
 //               ></img>
-//             </li> */}
+//             </div> */}
 //             </div>
 //           </div>
 //         );
@@ -226,8 +238,8 @@ function HomePage() {
       ></button>
     </div>
     <div class="offcanvas-body">
-      <p>Some text lorem ipsum.</p>
-      <p>Some text lorem ipsum.</p>
+      <div>Some text lorem ipsum.</div>
+      <div>Some text lorem ipsum.</div>
       <button class="btn btn-secondary" type="button">
         A Button
       </button>
@@ -244,3 +256,4 @@ function HomePage() {
   </button> */}
 </>;
 export default HomePage;
+

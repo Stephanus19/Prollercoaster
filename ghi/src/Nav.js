@@ -9,6 +9,7 @@ import SignUpModal from "./SignUpModal";
 import { useEffect, useContext } from "react";
 import ShowFavorites from "./FavoritesOffCanvas";
 
+
 function LoginButtons(props) {
   const dispatch = useDispatch();
   const classNames = `buttons ${props.show ? "" : "is-hidden"}`;
@@ -57,7 +58,6 @@ function LogoutButton() {
 }
 
 function FavoritesButton(props) {
-
   return (
       <button
         type="button"
@@ -93,11 +93,12 @@ function Nav() {
                 // <LoginButtons show={false} />
                 token ? (
                   <>
+                  <div className="btn-group" role="group" aria-label="Basic example">
                     <LogoutButton />
                     <FavoritesButton />
-                    Welcome {token.account.username}!
+                    Welddcome {token.account.username}!
+                  </div>
                   </>
-                  
                 ) : (
                   <LoginButtons show={true} />
                 )
