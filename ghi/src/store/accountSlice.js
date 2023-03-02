@@ -10,8 +10,6 @@ const initialState = {
   last_name: "",
 };
 
-//export const Context = createContext(initialState) //added this line
-
 export const accountSlice = createSlice({
   name: "account",
   initialState,
@@ -26,7 +24,7 @@ export const accountSlice = createSlice({
       return initialState;
     },
   },
-}, ); //added initialstate
+}); 
 
 export const { clearForm, updateField, showModal } = accountSlice.actions;
 

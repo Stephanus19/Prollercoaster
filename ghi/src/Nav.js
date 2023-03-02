@@ -40,15 +40,11 @@ function LoginButtons(props) {
 function LogoutButton() {
   const navigate = useNavigate();
   const [logout, { data }] = useLogoutMutation();
-  // const [state] = useContext(Context)
-  {/* working on line above */}
 
   useEffect(() => {
     if (data) {
       navigate("/");
     }
-    // console.log("logoutbutton funciton", logout)
-    {/* working on line above */}  
   }, [data, navigate]);
 
   return (
@@ -56,7 +52,6 @@ function LogoutButton() {
       <button onClick={logout} className="button is-light">
         Logout
       </button>
-      {/* <div>{accountSlice.state["username"]}</div>   working on this line  */}
     </div>
   );
 }
@@ -101,7 +96,6 @@ function Nav() {
                     <LogoutButton />
                     <FavoritesButton />
                     Welcome {token.account.username}!
-                    {/* {accountSlice.action.payload.account.username} working on this */}
                   </>
                   
                 ) : (
