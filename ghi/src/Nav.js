@@ -83,7 +83,8 @@ function Nav() {
     {/* {token ? (
       <ShowFavorites />
       ) : ("Login to see favorites.")} */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+        {/* navbar-light bg-light */}
         <div className="container-fluid">
           <div className="row bottom-buffer">
         <div id="navbarBasicExample" className="navbar-menu">
