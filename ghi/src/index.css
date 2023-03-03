@@ -105,3 +105,13 @@ code {
 #favorites-icon {
   background-color: #f7f7f7;
 }
+
+.modal-content {
+  border-radius: 30px;
+}
+
+#secondary-login-icon {
+  background-color: white;
+  color: #2a52be;
+  text-decoration: underline;
+}

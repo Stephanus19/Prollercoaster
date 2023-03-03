@@ -49,7 +49,10 @@ function ShowFavorites() {
           <div>
             {favoritedCoasters?.map((favorites) => {
               return (
-                <div className="card h-10 m-3 border-light" style={{ width: "18rem" }}>
+                <div
+                  className="card h-10 m-3 border-light"
+                  style={{ width: "18rem" }}
+                >
                   <img
                     src={`https://captaincoaster.com/images/coasters/${favorites.mainImage.path}`}
                     className="card-img-top"
@@ -59,12 +62,20 @@ function ShowFavorites() {
                   <div className="card-body">
                     <h5 className="card-title">{favorites.name}</h5>
                     <h6 className="card-title">{favorites.park.name}</h6>
-                    <p className="card-text">
-                      <div key={favorites.speed}><em>Speed:</em> {favorites.speed}</div>
-                      <div key={favorites.height}><em>Height:</em> {favorites.height}</div>
-                      <div key={favorites.inversionsNumber}>{" "}<em>Inversions:</em>{favorites.inversionsNumber}</div>
+                    <div className="card-text">
+                      <div key={favorites.speed}>
+                        <em>Speed:</em> {favorites.speed}
+                      </div>
+                      <div key={favorites.height}>
+                        <em>Height:</em> {favorites.height}
+                      </div>
+                      <div key={favorites.inversionsNumber}>
+                        {" "}
+                        <em>Inversions:</em>
+                        {favorites.inversionsNumber}
+                      </div>
                       <DeleteFavorite rollercoasterId={favorites.id} />
-                    </p>
+                    </div>
                   </div>
                 </div>
               );

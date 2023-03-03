@@ -1,7 +1,7 @@
 import { useLoginMutation, useGetTokenQuery } from "./store/api";
 import { useSelector, useDispatch } from "react-redux";
 import { eventTargetSelector as target, preventDefault } from "./store/utils";
-import { updateField, clearForm, LOG_IN_MODAL } from "./store/accountSlice";
+import { updateField, LOG_IN_MODAL, SIGN_UP_MODAL, showModal } from "./store/accountSlice";
 import { useCallback } from "react";
 
 function Login() {
@@ -70,15 +70,15 @@ function Login() {
     <form onSubmit={handleSubmit}>
       <div
         className="modal fade"
-        id="exampleModal"
+        id="loginModal"
         tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="LoginModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
+              <h5 className="modal-title" id="LoginModalLabel">
                 Login
               </h5>
               <button
@@ -89,7 +89,7 @@ function Login() {
               ></button>
             </div>
             <div className="modal-body">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">Username </label>
               <input
                 type="text"
                 id="username"
@@ -131,6 +131,19 @@ function Login() {
               >
                 {isLoading ? "Logging in..." : "Log in"}
               </button>
+              <p>
+                Don't have an account yet?{" "}
+                <button
+                  onClick={() => dispatch(showModal(SIGN_UP_MODAL))}
+                  type="button"
+                  className="btn icon"
+                  data-bs-toggle="modal"
+                  data-bs-target="#signupModal"
+                  id="secondary-signup-icon"
+                >
+                  Sign Up! 
+                </button>
+              </p>
             </div>
           </div>
         </div>
@@ -140,5 +153,3 @@ function Login() {
 }
 
 export default Login;
-
-

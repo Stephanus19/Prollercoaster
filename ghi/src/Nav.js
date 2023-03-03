@@ -15,7 +15,7 @@ import SignUpModal from "./SignUpModal";
 import { useEffect, useContext } from "react";
 import ShowFavorites from "./FavoritesOffCanvas";
 
-function LoginButtons(props) {
+export function LoginButtons(props) {
   const dispatch = useDispatch();
   const classNames = `buttons ${props.show ? "" : "is-hidden"}`;
 
@@ -37,7 +37,7 @@ function LoginButtons(props) {
         type="button"
         className="btn icon"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
+        data-bs-target="#loginModal"
         id="login-icon"
       >
         <span className="material-icons">login</span>
@@ -139,7 +139,7 @@ function Nav() {
       </nav>
       <Login />
       <SignUpModal />
-      {token ? <ShowFavorites /> : "Login to see favorites."}
+      {token ? <ShowFavorites /> : ""}
     </>
   );
 }
