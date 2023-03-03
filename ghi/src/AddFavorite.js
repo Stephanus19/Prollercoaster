@@ -24,12 +24,26 @@ export default function AddFavorite({ rollercoasterId }) {
   }, [data]);
 
   return (
-    <button onClick={() => handleAddFavorite(rollercoasterId)}>
-      {isFavorited ? "Favorited" : "Add to Favorites"}
+    <button
+      onClick={() => handleAddFavorite(rollercoasterId)}
+      className="bg-white icon"
+    >
+      {isFavorited ? (
+        <>
+          <span className="material-icons" id="add-favorite">
+            bookmark_add
+          </span>
+          <br></br>
+        </>
+      ) : (
+        <>
+          <span className="material-icons">bookmark_add</span>
+          <br></br>
+        </>
+      )}
     </button>
   );
 }
-
 // currently allows for duplicate favorited roller coasters
 // change button appearance after rc is favorited
 // only show button if user is logged in

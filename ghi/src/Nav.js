@@ -2,13 +2,18 @@ import { NavLink } from "react-router-dom";
 import { useGetTokenQuery, useLogoutMutation } from "./store/api";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { showModal, LOG_IN_MODAL, SIGN_UP_MODAL, accountSlice, Context } from "./store/accountSlice";
+import {
+  showModal,
+  LOG_IN_MODAL,
+  SIGN_UP_MODAL,
+  accountSlice,
+  Context,
+} from "./store/accountSlice";
 // import logo from "./logo.svg";
 import Login from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import { useEffect, useContext } from "react";
 import ShowFavorites from "./FavoritesOffCanvas";
-
 
 function LoginButtons(props) {
   const dispatch = useDispatch();
@@ -19,20 +24,24 @@ function LoginButtons(props) {
       <button
         onClick={() => dispatch(showModal(SIGN_UP_MODAL))}
         type="button"
-        className="btn btn-primary"
+        className="btn icon"
         data-bs-toggle="modal"
         data-bs-target="#signupModal"
+        id="signup-icon"
       >
-        <strong>Sign up!</strong>
+        <span className="material-icons">person_add</span>
+        <br></br>Sign Up
       </button>
       <button
         onClick={() => dispatch(showModal(LOG_IN_MODAL))}
         type="button"
-        className="btn btn-primary"
+        className="btn icon"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
+        id="login-icon"
       >
-        Login
+        <span className="material-icons">login</span>
+        <br></br>Login
       </button>
     </div>
   );
@@ -50,8 +59,9 @@ function LogoutButton() {
 
   return (
     <div className="buttons">
-      <button onClick={logout} className="button is-light">
-        Logout
+      <button onClick={logout} className="btn icon" id="logout-icon">
+        <span className="material-icons">logout</span>
+        <br></br>Logout
       </button>
     </div>
   );
@@ -59,15 +69,19 @@ function LogoutButton() {
 
 function FavoritesButton(props) {
   return (
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasExample"
-        aria-controls="offcanvasExample"
-      >
-        Favorite List
-      </button>
+    <button
+      type="button"
+      className="btn icon"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasExample"
+      aria-controls="offcanvasExample"
+      id="favorites-icon"
+    >
+      <>
+        <span className="material-icons">bookmarks</span>
+        <br></br> Favorites
+      </>
+    </button>
   );
 }
 
@@ -80,41 +94,52 @@ function Nav() {
 
   return (
     <>
-    {/* {token ? (
+      {/* {token ? (
       <ShowFavorites />
       ) : ("Login to see favorites.")} */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
-        {/* navbar-light bg-light */}
+      <nav className="navbar navbar-expand-lg navbar-light" id="navbar">
+        <div className="container">
+          <img
+            src="rollercoastericon.png"
+            alt="rollercoaster icon"
+            width="60px"
+          />
+        </div>
+        {token ? (
+          <div className="container" id="welcome-string">
+            <h5 id="welcome-string"> Welddcome, {token.account.username}!</h5>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="container-fluid">
           <div className="row bottom-buffer">
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-end">
-            <div className="navbar-item">
-              {
-                // <LoginButtons show={false} />
-                token ? (
-                  <>
-                  <div className="btn-group" role="group" aria-label="Basic example">
-                    <LogoutButton />
-                    <FavoritesButton />
-                    Welddcome {token.account.username}!
-                  </div>
-                  </>
-                ) : (
-                  <LoginButtons show={true} />
-                )
-              }
+            <div id="navbarBasicExample" className="navbar-menu">
+              <div className="nav navbar-nav" id="buttons">
+                <div className="navbar-item">
+                  {token ? (
+                    <>
+                      <div
+                        className="btn-group"
+                        role="group"
+                        aria-label="Basic example"
+                      >
+                        <LogoutButton />
+                        <FavoritesButton />
+                      </div>
+                    </>
+                  ) : (
+                    <LoginButtons show={true} />
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-          </div>
-          </div>
-          </div>
-        </nav>
-        <Login />
-        <SignUpModal />
-        {token ? (
-        <ShowFavorites />
-        ) : ("Login to see favorites.")}
+        </div>
+      </nav>
+      <Login />
+      <SignUpModal />
+      {token ? <ShowFavorites /> : "Login to see favorites."}
     </>
   );
 }
