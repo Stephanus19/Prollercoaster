@@ -27,11 +27,67 @@ code {
 	bottom: 0;
 	top: 60px; 
   z-index: 1;
+  background: #fff;
+  border-bottom: 1px solid lightgray;
+  
 }
 
 .section {
 	margin: 60px auto;
 	padding: 90px 30px;
-	background-color: #FFCDD2;
 	text-align: center;
+}
+
+.subnav__container {
+		/* align-items: baseline center; */
+		display: flex;
+		margin: 0 60px;
+		padding: 15px 0;
+    justify-content: center;
+    
+	}
+
+.card-img-top{
+  border-radius: 30px;
+}
+
+.material-icons{
+  color: #2a52be;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Material Icons';
+  font-weight: bold;
+  font-style: normal;
+  font-size: 36px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.material-icons:active{
+  color: red;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Material Icons';
+  font-weight: bold;
+  font-style: normal;
+  font-size: 36px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.icon{
+  border:0;
+  background:white;
+  font-weight: bold;
+  /*And other css to remove the default button property */    
 }

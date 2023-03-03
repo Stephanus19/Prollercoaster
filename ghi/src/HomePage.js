@@ -11,10 +11,10 @@ function Card(props) {
     <>
       {props.list.map((rollercoasters) => {
         return (
-          <div className="card h-10 mb-3 mx-3" style={{ width: "18rem" }}>
+          <div className="card h-10 mb-3 mx-3 border-light" style={{ width: "18rem" }}>
             <img
               src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
-              className="card-img-top"
+              className="card-img-top" 
               style={{ height: "15rem" }}
               alt="rollercoaster"
             />
@@ -109,10 +109,14 @@ function HomePage() {
 		<div className="subnav__container">
 			<div className="subnav__title">
       <div className="container">
-        <button type="button" class="btn btn-primary" onClick={() => setFilter("speed")}>Speed</button>
-        <button type="button" class="btn btn-primary" onClick={() => setFilter("height")}>Height</button>
-        <button type="button" class="btn btn-primary" onClick={() => setFilter("inversionsNumber")}>Inversions</button>
-        <button type="button" class="btn btn-primary" onClick={() => setFilter("A-Z")}>A-Z</button>
+        <button type="button" className="btn icon" onClick={() => setFilter("speed")}><span className="material-icons">
+        rocket_launch</span><br></br>Speed</button>
+        <button type="button" className="btn icon"  onClick={() => setFilter("height")}><span className="material-icons">
+        height</span><br></br>Height</button>
+        <button type="button" className="btn icon"  onClick={() => setFilter("inversionsNumber")}><span className="material-icons">
+        refresh</span><br></br>Loopy Loops</button>
+        <button type="button" className="btn icon" onClick={() => setFilter("A-Z")}><span className="material-icons">
+        sort_by_alpha</span><br></br>Alphabetical</button>
         </div>
       </div>
       </div>
