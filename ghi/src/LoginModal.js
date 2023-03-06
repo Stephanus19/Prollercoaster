@@ -1,7 +1,12 @@
 import { useLoginMutation, useGetTokenQuery } from "./store/api";
 import { useSelector, useDispatch } from "react-redux";
 import { eventTargetSelector as target, preventDefault } from "./store/utils";
-import { updateField, LOG_IN_MODAL, SIGN_UP_MODAL, showModal } from "./store/accountSlice";
+import {
+  updateField,
+  LOG_IN_MODAL,
+  SIGN_UP_MODAL,
+  showModal,
+} from "./store/accountSlice";
 import { useCallback } from "react";
 
 function Login() {
@@ -79,6 +84,11 @@ function Login() {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="LoginModalLabel">
+                <img
+                  src="rollercoastericon.png"
+                  alt="rollercoaster icon"
+                  width="60px"
+                />
                 Login
               </h5>
               <button
@@ -141,7 +151,7 @@ function Login() {
                   data-bs-target="#signupModal"
                   id="secondary-signup-icon"
                 >
-                  Sign Up! 
+                  Sign Up!
                 </button>
               </p>
             </div>

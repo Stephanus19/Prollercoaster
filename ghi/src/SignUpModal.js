@@ -37,6 +37,11 @@ function SignUpModal() {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
+              <img
+                src="rollercoastericon.png"
+                alt="rollercoaster icon"
+                width="60px"
+              />
               Sign Up
             </h5>
             <button

@@ -18,7 +18,7 @@ code {
   /* justify-content: space-between; */
   height: 70px;
   top: 0;
-  z-index: 1;
+  z-index: 3;
   background: linear-gradient(
     -225deg,
     #f7f7f7 0,
@@ -115,3 +115,41 @@ code {
   color: #2a52be;
   text-decoration: underline;
 }
+
+.spinner-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+
+.spinner-container video {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+
+.loading-message {
+  z-index: 9999;
+  color: white;
+  position: absolute;
+  margin-top: 80px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: larger;
+}
+
+/* .video-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 10px;
+  padding: 5px 5px;
+  font-size: 20px;
+  font-family: Helvetica;
+  color: #fff;
+  background-color: rgba(50, 50, 50, 0.3);
+} */

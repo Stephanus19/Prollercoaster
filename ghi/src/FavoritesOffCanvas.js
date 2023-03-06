@@ -64,10 +64,12 @@ function ShowFavorites() {
                     <h6 className="card-title">{favorites.park.name}</h6>
                     <div className="card-text">
                       <div key={favorites.speed}>
-                        <em>Speed:</em> {favorites.speed}
+                        <em>Speed:</em>{" "}
+                        {Math.floor(favorites.speed * 0.621371192)}
                       </div>
                       <div key={favorites.height}>
-                        <em>Height:</em> {favorites.height}
+                        <em>Height:</em>{" "}
+                        {Math.floor(favorites.height * 3.28084)}
                       </div>
                       <div key={favorites.inversionsNumber}>
                         {" "}
