@@ -16,6 +16,7 @@ function Card(props) {
           <div
             className="card h-10 mb-3 mx-3 border-light"
             style={{ width: "18rem" }}
+            key={rollercoasters.id}
           >
             <img
               src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
@@ -104,7 +105,6 @@ function HomePage() {
   const y = () => {
     let i = 0;
     for (let rc of sortedCoasters) {
-      console.log(rc);
       columns[i].push(rc);
       i++;
       if (i > 0) {
@@ -161,7 +161,7 @@ function HomePage() {
       <section className="section">
         <div className="row row-cols-1 row-cols-md-3 g-5">
           {columns.map((sortedCoasters) => {
-            return <Card list={sortedCoasters} />;
+            return <Card list={sortedCoasters} key={sortedCoasters} />;
           })}
         </div>
       </section>

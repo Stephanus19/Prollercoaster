@@ -29,8 +29,7 @@ function Login() {
 
   const { data } = useGetTokenQuery();
   const isLoggedIn = !!data?.access_token;
-  console.log(isLoggedIn);
-  console.log(data);
+
 
   return (
     // <div className={modalClass} key="login-modal">

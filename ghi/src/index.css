@@ -29,6 +29,14 @@ code {
   border-bottom: 1px solid lightgray;
 }
 
+.navbar > .container {
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-content: left;
+  color: #2a52be;
+  font-weight: bold;
+}
 .navbar > .container-fluid {
   justify-content: flex-end;
 }

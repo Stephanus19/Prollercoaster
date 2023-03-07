@@ -10,8 +10,6 @@ export default function AddFavorite({ rollercoasterId }) {
   const [addFavorite, { data }] = useAddFavoriteMutation();
   const { data: favoritesList } = useGetFavoritesQuery();
   const { data: token } = useGetTokenQuery();
-  //   const [isFavorited, setIsFavorited] = useState(false);
-  console.log(favoritesList);
   const handleAddFavorite = async (rollercoasterId) => {
     const favoriteData = { rollercoaster_id: rollercoasterId };
     await addFavorite(favoriteData);

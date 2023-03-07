@@ -12,8 +12,6 @@ export default function DeleteFavorite({ rollercoasterId }) {
     await deleteFavorite(rollercoasterId);
   };
 
-  // logs 'undefined' 60 times
-  console.log(data);
 
   // set favorited state when data is updated?
   //   useEffect(() => {

@@ -87,7 +87,6 @@ function FavoritesButton(props) {
 
 function Nav() {
   const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
-  console.log(token);
   // const {
   //   account: { roles = [] },
   // } = token || { account: {} };
@@ -103,11 +102,11 @@ function Nav() {
             src="rollercoastericon.png"
             alt="rollercoaster icon"
             width="60px"
-          />
+          />Proller Coaster
         </div>
         {token ? (
           <div className="container" id="welcome-string">
-            <h5 id="welcome-string"> Welddcome, {token.account.username}!</h5>
+            <h5 id="welcome-string"> Welcome, {token.account.username}!</h5>
           </div>
         ) : (
           ""
