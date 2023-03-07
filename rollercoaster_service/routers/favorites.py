@@ -27,5 +27,6 @@ def get_favorite_by_user(
 def delete_favorite(
     rollercoaster_id: int,
     repo: FavoritesRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 ):
-    return repo.delete_favorite(rollercoaster_id)
+    return repo.delete_favorite(rollercoaster_id, user_id = account_data["id"])

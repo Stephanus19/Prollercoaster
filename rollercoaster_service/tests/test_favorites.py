@@ -23,7 +23,7 @@ class FakeFavoritesRepository:
     def get_favorites_by_user(self, user_id: int):
         return [{"id": 1, "user_id": 12, "rollercoaster_id": 7}]
 
-    def delete_favorite(self, rollercoaster_id: int):
+    def delete_favorite(self, rollercoaster_id: int, user_id: int):
         return True
 
 
@@ -53,4 +53,13 @@ def test_get_favorites_by_user():
     app.dependency_overrides = {}
 
 def test_delete_favorite():
-    pass
+    app.dependency_overrides[FavoritesRepository] = FakeFavoritesRepository
+    app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_account_data
+    rollercoaster_id = 7
+
+    res = client.delete(f"/favorites?rollercoaster_id={rollercoaster_id}")
+
+    assert res.status_code == 200
+    assert res.json() == True
+
+    app.dependency_overrides = {}
