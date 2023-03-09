@@ -7,10 +7,11 @@ import ShowFavorites from "./FavoritesOffCanvas";
 import Roller from "./RollerVid.mp4";
 import Landing from "./LandingPage";
 import RollercoasterDetail from "./RollercoasterDetail";
-import {Link, Redirect} from "react-router-dom"
+import { Link, Redirect } from "react-router-dom";
+import Shambhala from "./EEPOV";
 
 function Card(props) {
-  const [selectedID, setSelectedID] = useState(null)
+  const [selectedID, setSelectedID] = useState(null);
 
   // useEffect(() => {
   //       if(selectedID !== null){
@@ -22,7 +23,7 @@ function Card(props) {
   //       </>
   //       )}
   //   },[selectedID])
- 
+
   // useEffect(() => {
   //   return(
   //   <RollercoasterDetail id={selectedID}/>)
@@ -33,18 +34,19 @@ function Card(props) {
     <>
       {props.list.map((rollercoasters) => {
         return (
-          
           <div
             className="card h-10 mb-3 mx-3 border-light"
             style={{ width: "18rem" }}
             key={rollercoasters.id}
           >
-            <img
-              src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
-              className="card-img-top"
-              style={{ height: "15rem" }}
-              alt="rollercoaster"
-            />
+            <Link to={"/details/" + rollercoasters.id}>
+              <img
+                src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
+                className="card-img-top"
+                style={{ height: "15rem" }}
+                alt="rollercoaster"
+              />
+            </Link>
             <div className="card-body">
               <h5 className="card-title">{rollercoasters.name}</h5>
               <h6 className="card-title">{rollercoasters.park.name}</h6>
@@ -69,10 +71,6 @@ function Card(props) {
                   detail
                
                 </button> */}
-                <Link to={"/details/"+rollercoasters.id}>
-                  detail
-                {/* <RollercoasterDetail id={rollercoasters.id}/> */}
-                </Link>
               </div>
             </div>
           </div>
@@ -195,6 +193,9 @@ function HomePage() {
           })}
         </div>
       </section>
+      <div>
+        <Shambhala />
+      </div>
     </>
   );
 }

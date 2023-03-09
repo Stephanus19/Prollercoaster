@@ -102,7 +102,8 @@ function Nav() {
             src="rollercoastericon.png"
             alt="rollercoaster icon"
             width="60px"
-          />Proller Coaster
+          />
+          Proller Coaster
         </div>
         {token ? (
           <div className="container" id="welcome-string">
