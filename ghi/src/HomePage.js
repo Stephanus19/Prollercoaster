@@ -10,73 +10,50 @@ import RollercoasterDetail from "./RollercoasterDetail";
 import { Link, Redirect } from "react-router-dom";
 import Shambhala from "./EEPOV";
 
-function Card(props) {
+function Card({ rollercoasters }) {
   const [selectedID, setSelectedID] = useState(null);
-
-  // useEffect(() => {
-  //       if(selectedID !== null){
-  //       // lazyDetail(id)}
-  //       return (
-  //       <>
-  //       <Redirect to="/detail">
-  //       </Redirect>
-  //       </>
-  //       )}
-  //   },[selectedID])
-
-  // useEffect(() => {
-  //   return(
-  //   <RollercoasterDetail id={selectedID}/>)
-  // },[selectedID])
 
   return (
     // <div className="col">
     <>
-      {props.list.map((rollercoasters) => {
-        return (
-          <div
-            className="card h-10 mb-3 mx-3 border-light"
-            style={{ width: "18rem" }}
-            key={rollercoasters.id}
-          >
-            <Link to={"/details/" + rollercoasters.id}>
-              <img
-                src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
-                className="card-img-top"
-                style={{ height: "15rem" }}
-                alt="rollercoaster"
-              />
-            </Link>
-            <div className="card-body">
-              <h5 className="card-title">{rollercoasters.name}</h5>
-              <h6 className="card-title">{rollercoasters.park.name}</h6>
-              <div className="card-text">
-                <div key={rollercoasters.speed}>
-                  <em>Speed:</em>{" "}
-                  {Math.floor(rollercoasters.speed * 0.621371192)}
-                </div>
-                <div key={rollercoasters.height}>
-                  <em>Height:</em> {Math.floor(rollercoasters.height * 3.28084)}
-                </div>
-                <div key={rollercoasters.inversionsNumber}>
-                  {" "}
-                  <em>Inversions:</em>
-                  {rollercoasters.inversionsNumber}
-                </div>
-                {/* <div key={rollercoasters.park.name}>
+      <div
+        className="card h-10 mb-3 mx-3 border-light"
+        style={{ width: "18rem" }}
+        key={rollercoasters.id}
+      >
+        <img
+          src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
+          className="card-img-top"
+          style={{ height: "15rem" }}
+          alt="rollercoaster"
+        />
+        <div className="card-body">
+          <h5 className="card-title">{rollercoasters.name}</h5>
+          <h6 className="card-title">{rollercoasters.park.name}</h6>
+          <div className="card-text">
+            <div key={rollercoasters.speed}>
+              <em>Speed:</em> {Math.floor(rollercoasters.speed * 0.621371192)}
+            </div>
+            <div key={rollercoasters.height}>
+              <em>Height:</em> {Math.floor(rollercoasters.height * 3.28084)}
+            </div>
+            <div key={rollercoasters.inversionsNumber}>
+              {" "}
+              <em>Inversions:</em>
+              {rollercoasters.inversionsNumber}
+            </div>
+            {/* <div key={rollercoasters.park.name}>
                   Park: {rollercoasters.park.name}
                 </div> */}
-                <AddFavorite rollercoasterId={rollercoasters.id} />
-                {/* <button onClick={() => setSelectedID(rollercoasters.id)} type="button" className="btn btn-primary">   
+            <AddFavorite rollercoasterId={rollercoasters.id} />
+            <RollercoasterDetail id={rollercoasters.id} />
+            {/* <button onClick={() => setSelectedID(rollercoasters.id)} type="button" className="btn btn-primary">
                   detail
-               
+
                 </button> */}
-              </div>
-            </div>
           </div>
-        );
-      })}
-      {/* <RollercoasterDetail id={selectedID}/> */}
+        </div>
+      </div>
     </>
   );
 }
@@ -129,18 +106,18 @@ function HomePage() {
     }
   });
 
-  const columns = [[]];
-  const y = () => {
-    let i = 0;
-    for (let rc of sortedCoasters) {
-      columns[i].push(rc);
-      i++;
-      if (i > 0) {
-        i = 0;
-      }
-    }
-  };
-  y();
+  // const columns = [[]];
+  // const y = () => {
+  //   let i = 0;
+  //   for (let rc of sortedCoasters) {
+  //     columns[i].push(rc);
+  //     i++;
+  //     if (i > 0) {
+  //       i = 0;
+  //     }
+  //   }
+  // };
+  // y();
 
   return (
     // KEEP THIS RETURN STATEMENT - uses columns loop
@@ -188,8 +165,10 @@ function HomePage() {
       </div>
       <section className="section">
         <div className="row row-cols-1 row-cols-md-3 g-5">
-          {columns.map((sortedCoasters) => {
-            return <Card list={sortedCoasters} key={sortedCoasters} />;
+          {sortedCoasters.map((sortedCoaster) => {
+            return (
+              <Card rollercoasters={sortedCoaster} key={sortedCoaster.id} />
+            );
           })}
         </div>
       </section>
