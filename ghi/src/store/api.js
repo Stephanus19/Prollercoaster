@@ -89,6 +89,7 @@ export const apiSlice = createApi({
           method: "post",
           url: "/favorites",
           body: data,
+          credentials: "include",
         };
       },
       invalidatesTags: ["Favorites"],
@@ -107,6 +108,7 @@ export const apiSlice = createApi({
         return {
           method: "delete",
           url: `/favorites?rollercoaster_id=${rollercoasterId}`,
+          credentials: "include",
         };
       },
       invalidatesTags: ["Favorites"],
@@ -114,7 +116,7 @@ export const apiSlice = createApi({
 
     getRollercoasterDetail: builder.query({
       query: (id) => ({
-        url: `/api/coasters/${id}`
+        url: `/api/coasters/${id}`,
       }),
       providesTags: ["Coasters"],
     }),

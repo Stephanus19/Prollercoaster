@@ -17,16 +17,6 @@ function ShowFavorites() {
 
   return (
     <>
-      {/* <button
-        className="btn btn-primary"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasExample"
-        aria-controls="offcanvasExample"
-      >
-        Favorites List
-      </button> */}
-
       <div
         className="offcanvas offcanvas-start"
         tabIndex="-1"
@@ -51,32 +41,34 @@ function ShowFavorites() {
                 <div
                   className="card h-10 m-3 border-light"
                   style={{ width: "18rem" }}
-                  key= { favorites.id }
+                  key={favorites.id}
                 >
-                  <img
-                    src={`https://captaincoaster.com/images/coasters/${favorites.mainImage.path}`}
-                    className="card-img-top"
-                    style={{ height: "15rem" }}
-                    alt=""
-                  />
+                  <div className="container card-image-container">
+                    <img
+                      src={`https://captaincoaster.com/images/coasters/${favorites.mainImage.path}`}
+                      className="card-img-top"
+                      style={{ height: "15rem" }}
+                      alt="rollercoaster"
+                    />
+                    <DeleteFavorite rollercoasterId={favorites.id} />
+                  </div>
                   <div className="card-body">
                     <h5 className="card-title">{favorites.name}</h5>
                     <h6 className="card-title">{favorites.park.name}</h6>
                     <div className="card-text">
                       <div key={favorites.speed}>
-                        <em>Speed:</em>{" "}
-                        {Math.floor(favorites.speed * 0.621371192)}
+                        <em>Speed: </em>{" "}
+                        {Math.floor(favorites.speed * 0.621371192)} mph
                       </div>
                       <div key={favorites.height}>
-                        <em>Height:</em>{" "}
-                        {Math.floor(favorites.height * 3.28084)}
+                        <em>Height: </em>{" "}
+                        {Math.floor(favorites.height * 3.28084)} ft
                       </div>
                       <div key={favorites.inversionsNumber}>
                         {" "}
-                        <em>Inversions:</em>
+                        <em>Inversions: </em>
                         {favorites.inversionsNumber}
                       </div>
-                      <DeleteFavorite rollercoasterId={favorites.id} />
                     </div>
                   </div>
                 </div>

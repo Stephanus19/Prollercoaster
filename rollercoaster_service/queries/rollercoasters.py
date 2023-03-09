@@ -65,10 +65,9 @@ class CoastersQueries:
             data = response.json()
             r["park"] = data
         return rollercoasters
-    
+
     def get_coaster_detail(self, id:int):
         headers = {"X-AUTH-TOKEN": os.environ["RC_API_KEY"]}
         response = requests.get(f"https://captaincoaster.com/api/coasters/{id}", headers=headers)
         data = response.json()
-
         return data

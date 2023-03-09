@@ -27,8 +27,8 @@ function RollercoasterDetail({ id }) {
 
   return (
     <>
-      <button type="button" className="btn btn-primary" onClick={openModal}>
-        Launch demo modal
+      <button type="button" className="btn" onClick={openModal}>
+        <span className="material-icons detail-button">info</span>
       </button>
       {isOpen && (
         <div
@@ -61,19 +61,19 @@ function RollercoasterDetail({ id }) {
                 <h6 className="card-text">{data.park.name}</h6>
                 <div className="card-text">
                   <div key={data.speed}>
-                    <em>Speed:</em> {Math.floor(data.speed * 0.621371192)}
+                    <em>Speed: </em> {Math.floor(data.speed * 0.621371192)} mph
                   </div>
                   <div key={data.height}>
-                    <em>Height:</em> {Math.floor(data.height * 3.28084)}
+                    <em>Height: </em> {Math.floor(data.height * 3.28084)} ft
                   </div>
                   <div key={data.inversionsNumber}>
                     {" "}
-                    <em>Inversions:</em>
+                    <em>Inversions: </em>
                     {data.inversionsNumber}
                   </div>
                   <div className="card-text">
                     <em>Length: </em>
-                    {Math.floor(data.length * 3.28084)}
+                    {Math.floor(data.length * 3.28084)} ft
                   </div>
                   <div className="card-text">
                     <em>Manufacturer: </em>

@@ -12,7 +12,6 @@ export default function DeleteFavorite({ rollercoasterId }) {
     await deleteFavorite(rollercoasterId);
   };
 
-
   // set favorited state when data is updated?
   //   useEffect(() => {
   //     console.log(data);
@@ -22,8 +21,11 @@ export default function DeleteFavorite({ rollercoasterId }) {
   //   }, [data]);
 
   return (
-    <button onClick={() => handleDeleteFavorite(rollercoasterId)} className="icon">
-      <span className="material-icons">bookmark_remove</span>
+    <button
+      onClick={() => handleDeleteFavorite(rollercoasterId)}
+      className="icon"
+    >
+      <span className="material-icons favorites">bookmark_remove</span>
       <br></br>
     </button>
   );

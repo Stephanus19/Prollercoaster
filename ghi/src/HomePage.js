@@ -1,58 +1,47 @@
-import { useState, useEffect } from "react";
-import { useGetRollercoasterQuery, useAddFavoriteMutation } from "./store/api";
-import { preventDefault, eventTargetSelector as target } from "./store/utils";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useGetRollercoasterQuery, useGetTokenQuery } from "./store/api";
 import AddFavorite from "./AddFavorite";
-import ShowFavorites from "./FavoritesOffCanvas";
 import Roller from "./RollerVid.mp4";
-import Landing from "./LandingPage";
 import RollercoasterDetail from "./RollercoasterDetail";
-import { Link, Redirect } from "react-router-dom";
 import Shambhala from "./EEPOV";
 
 function Card({ rollercoasters }) {
-  const [selectedID, setSelectedID] = useState(null);
-
+  const { data: token } = useGetTokenQuery();
   return (
-    // <div className="col">
     <>
       <div
-        className="card h-10 mb-3 mx-3 border-light"
+        className="card h-10 mb-3 mx-3"
         style={{ width: "18rem" }}
         key={rollercoasters.id}
       >
-        <img
-          src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
-          className="card-img-top"
-          style={{ height: "15rem" }}
-          alt="rollercoaster"
-        />
+        <div className="container card-image-container">
+          <img
+            src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
+            className="card-img-top"
+            style={{ height: "15rem" }}
+            alt="rollercoaster"
+          />
+          {token && <AddFavorite rollercoasterId={rollercoasters.id} />}
+        </div>
         <div className="card-body">
-          <h5 className="card-title">{rollercoasters.name}</h5>
+          <h5 className="card-title">{rollercoasters.name} </h5>
           <h6 className="card-title">{rollercoasters.park.name}</h6>
           <div className="card-text">
             <div key={rollercoasters.speed}>
-              <em>Speed:</em> {Math.floor(rollercoasters.speed * 0.621371192)}
+              <em>Speed: </em> {Math.floor(rollercoasters.speed * 0.621371192)}{" "}
+              mph
             </div>
             <div key={rollercoasters.height}>
-              <em>Height:</em> {Math.floor(rollercoasters.height * 3.28084)}
+              <em>Height: </em> {Math.floor(rollercoasters.height * 3.28084)} ft
             </div>
             <div key={rollercoasters.inversionsNumber}>
               {" "}
-              <em>Inversions:</em>
+              <em>Inversions: </em>
               {rollercoasters.inversionsNumber}
             </div>
-            {/* <div key={rollercoasters.park.name}>
-                  Park: {rollercoasters.park.name}
-                </div> */}
-            <AddFavorite rollercoasterId={rollercoasters.id} />
-            <RollercoasterDetail id={rollercoasters.id} />
-            {/* <button onClick={() => setSelectedID(rollercoasters.id)} type="button" className="btn btn-primary">
-                  detail
-
-                </button> */}
           </div>
         </div>
+        <RollercoasterDetail id={rollercoasters.id} />
       </div>
     </>
   );
@@ -61,9 +50,6 @@ function Card({ rollercoasters }) {
 function HomePage() {
   const { data: coasterList, isFetching } = useGetRollercoasterQuery();
   const [filter, setFilter] = useState("");
-  // const [addFavorite, { data }] = useAddFavoriteMutation();
-  // skip: true,
-  // selectFromResult: (result) => result.data,
 
   if (isFetching) {
     return (
@@ -94,8 +80,19 @@ function HomePage() {
       return coasterList;
     }
     if (filter === "A-Z") {
-      const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-      const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    }
+    if (filter === "park") {
+      const nameA = a.park.name.toUpperCase();
+      const nameB = b.park.name.toUpperCase();
       if (nameA < nameB) {
         return -1;
       }
@@ -106,22 +103,7 @@ function HomePage() {
     }
   });
 
-  // const columns = [[]];
-  // const y = () => {
-  //   let i = 0;
-  //   for (let rc of sortedCoasters) {
-  //     columns[i].push(rc);
-  //     i++;
-  //     if (i > 0) {
-  //       i = 0;
-  //     }
-  //   }
-  // };
-  // y();
-
   return (
-    // KEEP THIS RETURN STATEMENT - uses columns loop
-
     <>
       <div className="subnav">
         <div className="subnav__container">
@@ -129,7 +111,7 @@ function HomePage() {
             <div className="container">
               <button
                 type="button"
-                className="btn icon"
+                className="btn icon filter-buttons"
                 onClick={() => setFilter("speed")}
               >
                 <span className="material-icons">rocket_launch</span>
@@ -137,7 +119,7 @@ function HomePage() {
               </button>
               <button
                 type="button"
-                className="btn icon"
+                className="btn icon filter-buttons"
                 onClick={() => setFilter("height")}
               >
                 <span className="material-icons">height</span>
@@ -145,7 +127,7 @@ function HomePage() {
               </button>
               <button
                 type="button"
-                className="btn icon"
+                className="btn icon filter-buttons"
                 onClick={() => setFilter("inversionsNumber")}
               >
                 <span className="material-icons">refresh</span>
@@ -153,11 +135,19 @@ function HomePage() {
               </button>
               <button
                 type="button"
-                className="btn icon"
+                className="btn icon filter-buttons"
                 onClick={() => setFilter("A-Z")}
               >
                 <span className="material-icons">sort_by_alpha</span>
                 <br></br>Alphabetical
+              </button>
+              <button
+                type="button"
+                className="btn icon filter-buttons"
+                onClick={() => setFilter("park")}
+              >
+                <span className="material-icons">attractions</span>
+                <br></br>Park
               </button>
             </div>
           </div>
