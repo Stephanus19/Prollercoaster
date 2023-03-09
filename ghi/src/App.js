@@ -7,6 +7,7 @@ import Login from "./LoginModal";
 import { useGetTokenQuery } from "./store/api.js";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
+import RollercoasterDetail from "./RollercoasterDetail";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -36,6 +37,7 @@ function App() {
         <div className="container">
         <Routes>
           <Route path="" element={<HomePage />} />
+          <Route path="/details/:id" element={<RollercoasterDetail/>} />
         </Routes>
         </div>
       </BrowserRouter>

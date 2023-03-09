@@ -51,7 +51,7 @@ function ShowFavorites() {
                 <div
                   className="card h-10 m-3 border-light"
                   style={{ width: "18rem" }}
-                  key={favorites.id}
+                  key= { favorites.id }
                 >
                   <img
                     src={`https://captaincoaster.com/images/coasters/${favorites.mainImage.path}`}

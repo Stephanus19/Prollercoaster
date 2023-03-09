@@ -6,13 +6,34 @@ import AddFavorite from "./AddFavorite";
 import ShowFavorites from "./FavoritesOffCanvas";
 import Roller from "./RollerVid.mp4";
 import Landing from "./LandingPage";
+import RollercoasterDetail from "./RollercoasterDetail";
+import {Link, Redirect} from "react-router-dom"
 
 function Card(props) {
+  const [selectedID, setSelectedID] = useState(null)
+
+  // useEffect(() => {
+  //       if(selectedID !== null){
+  //       // lazyDetail(id)}
+  //       return (
+  //       <>
+  //       <Redirect to="/detail">
+  //       </Redirect>
+  //       </>
+  //       )}
+  //   },[selectedID])
+ 
+  // useEffect(() => {
+  //   return(
+  //   <RollercoasterDetail id={selectedID}/>)
+  // },[selectedID])
+
   return (
     // <div className="col">
     <>
       {props.list.map((rollercoasters) => {
         return (
+          
           <div
             className="card h-10 mb-3 mx-3 border-light"
             style={{ width: "18rem" }}
@@ -44,11 +65,20 @@ function Card(props) {
                   Park: {rollercoasters.park.name}
                 </div> */}
                 <AddFavorite rollercoasterId={rollercoasters.id} />
+                {/* <button onClick={() => setSelectedID(rollercoasters.id)} type="button" className="btn btn-primary">   
+                  detail
+               
+                </button> */}
+                <Link to={"/details/"+rollercoasters.id}>
+                  detail
+                {/* <RollercoasterDetail id={rollercoasters.id}/> */}
+                </Link>
               </div>
             </div>
           </div>
         );
       })}
+      {/* <RollercoasterDetail id={selectedID}/> */}
     </>
   );
 }
@@ -169,129 +199,4 @@ function HomePage() {
   );
 }
 
-// return (
-//   <>
-//     <div className="container">
-//       <div className="row row-cols-1 row-cols-md-3 g-4">
-
-//         <div className="col">
-//           {coasterList.map((rollercoasters) => {
-//             return (
-//               <div className="card h-10" style={{ width: "18rem" }}>
-//                 <img
-//                   src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
-//                   className="card-img-top img-thumbnail "
-//                   alt="rollercoaster"
-//                 />
-//                 <div className="card-body">
-//                   <div className="card-text">
-//                     <div key={rollercoasters.name}>
-//                       Name: {rollercoasters.name}
-//                     </div>
-//                     <div key={rollercoasters.speed}>
-//                       Speed: {rollercoasters.speed}
-//                     </div>
-//                     <div key={rollercoasters.height}>
-//                       Height: {rollercoasters.height}
-//                     </div>
-//                     <div key={rollercoasters.inversionsNumber}>
-//                       {" "}
-//                       Inversions:
-//                       {rollercoasters.inversionsNumber}
-//                     </div>
-//                     <div key={rollercoasters.park.name}>
-//                       {rollercoasters.park.name}
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             );
-//           })}
-//         </div>
-//       </div>
-//     </div>
-//   </>
-// );
-
-// return (
-//   <div className="container">
-//     <div className="row row-cols-1 row-cols-md-3 g-4">
-//       <div className="col">
-//         <Column list={coasterList} />
-//       </div>
-//     </div>
-//   </div>
-// );
-
-//   return (
-//     <>
-//       {coasterList.map((rollercoasters) => {
-//         console.log({ rollercoasters });
-//         return (
-//           <div className="card" style={{ width: "18rem" }}>
-//             <img
-//               src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
-//               className="card-img-top"
-//               alt="rollercoaster"
-//             />
-//             <div className="card-body">
-//               <div className="card-text">
-//                 Some quick example text to build on the card title and make up
-//                 the bulk of the card's content.
-//                 <div key={rollercoasters.name}>Name: {rollercoasters.name}</div>
-//                 <div key={rollercoasters.speed}>
-//                   Speed: {rollercoasters.speed}
-//                 </div>
-//                 <div key={rollercoasters.height}>
-//                   Height: {rollercoasters.height}
-//                 </div>
-//                 <div key={rollercoasters.inversionsNumber}>
-//                   {" "}
-//                   Inversions:
-//                   {rollercoasters.inversionsNumber}
-//                 </div>
-//                 <div key={rollercoasters.park.name}>
-//                   {rollercoasters.park.name}
-//                 </div>
-//               </div>
-//               {/* <div key={rollercoasters.id}>
-//               <img
-//                 src={`https://captaincoaster.com/images/coasters/${rollercoasters.mainImage.path}`}
-//               ></img>
-//             </div> */}
-//             </div>
-//           </div>
-//         );
-//       })}
-//     </>
-//   );
-// }
-<>
-  {/* <div class="offcanvas offcanvas-start" id="demo">
-    <div class="offcanvas-header">
-      <h1 class="offcanvas-title">Heading</h1>
-      <button
-        type="button"
-        class="btn-close text-reset"
-        data-bs-dismiss="offcanvas"
-      ></button>
-    </div>
-    <div class="offcanvas-body">
-      <div>Some text lorem ipsum.</div>
-      <div>Some text lorem ipsum.</div>
-      <button class="btn btn-secondary" type="button">
-        A Button
-      </button>
-    </div>
-  </div> */}
-
-  {/* <button
-    class="btn btn-primary"
-    type="button"
-    data-bs-toggle="offcanvas"
-    data-bs-target="#demo"
-  >
-    Open Offcanvas Sidebar
-  </button> */}
-</>;
 export default HomePage;

@@ -111,6 +111,13 @@ export const apiSlice = createApi({
       },
       invalidatesTags: ["Favorites"],
     }),
+
+    getRollercoasterDetail: builder.query({
+      query: (id) => ({
+        url: `/api/coasters/${id}`
+      }),
+      providesTags: ["Coasters"],
+    }),
   }),
 });
 
@@ -124,4 +131,6 @@ export const {
   useAddFavoriteMutation,
   useGetFavoritesQuery,
   useDeleteFavoriteMutation,
+  useGetRollercoasterDetailQuery,
+  useLazyGetRollercoasterDetailQuery,
 } = apiSlice;
