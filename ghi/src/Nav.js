@@ -109,8 +109,8 @@ function Nav() {
                         role="group"
                         aria-label="Basic example"
                       >
-                        <LogoutButton />
                         <FavoritesButton />
+                        <LogoutButton />
                       </div>
                     </>
                   ) : (

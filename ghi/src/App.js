@@ -34,12 +34,10 @@ function App() {
       {/* <Construct info={launch_info} /> */}
       <BrowserRouter>
         <Nav />
-        <div className="container">
-        <Routes>
-          <Route path="" element={<HomePage />} />
-          <Route path="/details/:id" element={<RollercoasterDetail/>} />
-        </Routes>
-        </div>
+          <Routes>
+            <Route path="" element={<HomePage />} />
+            <Route path="/details/:id" element={<RollercoasterDetail />} />
+          </Routes>
       </BrowserRouter>
     </div>
   );

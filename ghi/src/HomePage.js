@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useGetRollercoasterQuery, useGetTokenQuery } from "./store/api";
+import { Link } from "react-router-dom";
 import AddFavorite from "./AddFavorite";
 import Roller from "./RollerVid.mp4";
 import RollercoasterDetail from "./RollercoasterDetail";
@@ -153,17 +154,35 @@ function HomePage() {
           </div>
         </div>
       </div>
-      <section className="section">
-        <div className="row row-cols-1 row-cols-md-3 g-5">
-          {sortedCoasters.map((sortedCoaster) => {
-            return (
-              <Card rollercoasters={sortedCoaster} key={sortedCoaster.id} />
-            );
-          })}
-        </div>
-      </section>
+      <div className="container">
+        <section className="section">
+          <div className="row row-cols-1 row-cols-md-3 g-5">
+            {sortedCoasters.map((sortedCoaster) => {
+              return (
+                <Card rollercoasters={sortedCoaster} key={sortedCoaster.id} />
+              );
+            })}
+          </div>
+        </section>
+      </div>
       <div>
         <Shambhala />
+      </div>
+      <div
+        className="container footer"
+        style={{ justifyContent: "space-between" }}
+      >
+        <span>
+          <p>©2023 Proller Coaster</p>
+        </span>
+        <Link
+          to="https://gitlab.com/wads1/module3-project-gamma"
+          target="_blank"
+        >
+          <div className="container">
+            <img src="gitlab-logo-500.png" width="60px"></img>
+          </div>
+        </Link>
       </div>
     </>
   );

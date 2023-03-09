@@ -204,3 +204,17 @@ code {
   margin-left: 50px;
   margin-right: 50px;
 }
+
+.footer {
+  position: sticky;
+  border-top: solid 1px #bcbcbc;
+  z-index: 1;
+  bottom: 0px;
+  background-color: white;
+  width: 100%;
+  display: flex;
+}
+
+/* .row {
+  text-align: center;
+} */
