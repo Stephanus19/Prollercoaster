@@ -33,10 +33,8 @@ class AccountOut(BaseModel):
 
 class AccountRepository:
     def create(self, account: AccountIn, hashed_password: str) -> Account:
-        # connect the DB
         with pool.connection() as conn:
             with conn.cursor() as db:
-                # Run our INSERT
                 result = db.execute(
                     """
                     INSERT INTO accounts
@@ -51,17 +49,15 @@ class AccountRepository:
                     account.email,
                     account.first_name,
                     account.last_name
-                ]
+                    ]
                 )
                 id = result.fetchone()[0]
                 return Account(id=id, username=account.username, hashed_password=hashed_password,
                                 first_name=account.first_name, last_name=account.last_name, email=account.email)
 
     def get(self, username: str) -> Account:
-        #connect the DB
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                #Run our INSERT
                     result = db.execute(
                     """
                     SELECT

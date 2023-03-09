@@ -1,9 +1,9 @@
-import { useDeleteFavoriteMutation, useGetFavoritesQuery } from "./store/api";
+import { useGetFavoritesQuery } from "./store/api";
 import { useGetRollercoasterQuery } from "./store/api";
 import DeleteFavorite from "./DeleteFavorite";
 
 function ShowFavorites() {
-  const { data: coasterList, isLoading } = useGetRollercoasterQuery(); //Fetching?
+  const { data: coasterList, isLoading } = useGetRollercoasterQuery();
   const { data: favoritesList, isFetching } = useGetFavoritesQuery();
 
   if (isFetching || isLoading) {

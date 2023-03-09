@@ -13,13 +13,13 @@ class AccountForm(BaseModel):
     username: str
     password:str
 
+
 class AccountToken(Token):
     account: AccountOut
 
 
 class HTTPError(BaseModel):
     detail: str
-
 
 
 @router.post("/accounts", response_model= AccountToken | HTTPError)
@@ -32,7 +32,6 @@ async def create_accounts(
     hashed_password = authenticator.hash_password(info.password)
     print(info)
     try:
-
         account = repo.create(info, hashed_password)
     except DuplicateAccountError:
         raise HTTPException(
@@ -46,8 +45,7 @@ async def create_accounts(
 
 @router.get("/accounts")
 def get_accounts(
-    # account: Account,
-    repo: AccountRepository = Depends()
+        repo: AccountRepository = Depends()
     ):
     return {
         "accounts": repo.get_all(),
@@ -56,17 +54,16 @@ def get_accounts(
 
 @router.get("/accounts/{username}")
 def get_account(
-    username: str,
-    # account: Account,
-    repo: AccountRepository = Depends()
+        username: str,
+        repo: AccountRepository = Depends()
     ):
     return repo.get(username)
 
 
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
-    request: Request,
-    account: AccountOut = Depends(authenticator.try_get_current_account_data)
+        request: Request,
+        account: AccountOut = Depends(authenticator.try_get_current_account_data)
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
         return {
@@ -74,22 +71,3 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
-
-# @router.post("/api/accounts", response_model=AccountToken | HttpError)
-# async def create_account(
-#     info: Account,
-#     request: Request,
-#     response: Response,
-#     repo: AccountRepo = Depends(),
-# ):
-#     hashed_password = authenticator.hash_password(info.password)
-#     try:
-#         account = repo.create(info, hashed_password)
-#     except DuplicateAccountError:
-#         raise HTTPException(
-#             status_code=status.HTTP_400_BAD_REQUEST,
-#             detail="Cannot create an account with those credentials",
-#         )
-#     form = AccountForm(username=info.email, password=info.password)
-#     token = await authenticator.login(response, request, form, repo)
-#     return AccountToken(account=account, **token.dict())

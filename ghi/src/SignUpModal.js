@@ -9,9 +9,6 @@ import {
   LOG_IN_MODAL,
 } from "./store/accountSlice";
 import Notification from "./Notification";
-import { Link } from "react-router-dom";
-import LoginButtons from "./Nav";
-import Login from "./LoginModal";
 
 function SignUpModal() {
   const dispatch = useDispatch();
@@ -138,14 +135,6 @@ function SignUpModal() {
                 </div>
               </div>
               <div className="modal-footer">
-                {/* <button
-                  type="button"
-                  onClick={() => dispatch(showModal(null))}
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button> */}
                 <button
                   onClick={() => dispatch(showModal(null))}
                   disabled={signUpLoading}

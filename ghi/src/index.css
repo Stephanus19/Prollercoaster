@@ -15,7 +15,6 @@ code {
 .navbar {
   position: sticky;
   display: flex;
-  /* justify-content: space-between; */
   height: 70px;
   top: 0;
   z-index: 3;
@@ -64,7 +63,6 @@ code {
 }
 
 .subnav__container {
-  /* align-items: baseline center; */
   display: flex;
   margin: 0 60px;
   padding: 15px 0;
@@ -82,7 +80,7 @@ code {
   font-family: "Material Icons";
   font-weight: bold;
   font-style: normal;
-  font-size: 24px; /* Preferred icon size */
+  font-size: 24px;
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -96,7 +94,6 @@ code {
   border: 0;
   background: white;
   font-weight: bold;
-  /*And other css to remove the default button property */
 }
 
 #login-icon {

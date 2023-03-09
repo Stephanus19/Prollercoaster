@@ -7,9 +7,10 @@ class Favorites(BaseModel):
     user_id: int
     rollercoaster_id: int
 
+
 class FavoritesIn(BaseModel):
-    # user_id: int
     rollercoaster_id: int
+
 
 class FavoritesOut(BaseModel):
     id: int
@@ -18,10 +19,8 @@ class FavoritesOut(BaseModel):
 
 class FavoritesRepository:
     def create(self, favorites: FavoritesIn, user_id: int) -> Favorites:
-        #connect the DB
         with pool.connection() as conn:
             with conn.cursor() as db:
-                #Run our INSERT
                 result = db.execute(
                 """
                 INSERT INTO favorites
@@ -35,28 +34,20 @@ class FavoritesRepository:
                     favorites.rollercoaster_id,
                 ]
                 )
-                # record= None
                 id = result.fetchone()[0]
                 old_data = favorites.dict()
                 return FavoritesOut(id=id, **old_data)
-                # if id is not None:
-                #     record={}
-                #     for i, column in enumerate(db.description):
-                #         record[column.name]=id[i]
-                # return record
-
 
     def get_favorites_by_user(self, user_id: int):
         with pool.connection() as conn:
             with conn.cursor() as db:
-                #Run our INSERT
                 result = db.execute(
-                """
-                SELECT id, user_id, rollercoaster_id
-                FROM favorites
-                WHERE user_id = %s
-                """,
-                [user_id]
+                    """
+                    SELECT id, user_id, rollercoaster_id
+                    FROM favorites
+                    WHERE user_id = %s
+                    """,
+                    [user_id]
                 )
                 print("result", result)
                 results = []
@@ -72,11 +63,10 @@ class FavoritesRepository:
     def delete_favorite(self, rollercoaster_id: int, user_id: int):
         with pool.connection() as conn:
             with conn.cursor() as db:
-                #Run our INSERT
                 db.execute(
-                """
-                DELETE FROM favorites
-                WHERE rollercoaster_id = %s AND user_id = %s
-                """,
-                [rollercoaster_id, user_id]
+                    """
+                    DELETE FROM favorites
+                    WHERE rollercoaster_id = %s AND user_id = %s
+                    """,
+                    [rollercoaster_id, user_id]
                 )

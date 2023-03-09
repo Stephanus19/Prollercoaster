@@ -1,12 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { eventTargetSelector as target, preventDefault } from "./store/utils";
-import { useCallback, useState, useEffect } from "react";
-import {
-  useGetRollercoasterDetailQuery,
-  useLazyGetRollercoasterDetailQuery,
-} from "./store/api";
-import { useParams } from "react-router-dom";
-import "./RollercoasterDetail.css";
+import { useState } from "react";
+import { useLazyGetRollercoasterDetailQuery } from "./store/api";
 
 function RollercoasterDetail({ id }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,12 +30,22 @@ function RollercoasterDetail({ id }) {
           id="exampleModal"
           tabIndex="-1"
           aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
+          // aria-hidden="true"
         >
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
+                <img
+                  src="rollercoastericon.png"
+                  alt="rollercoaster icon"
+                  width="60px"
+                  style={{ marginRight: "10px" }}
+                />
+                <h5
+                  className="modal-title"
+                  id="exampleModalLabel"
+                  style={{ fontSize: "24px" }}
+                >
                   {data.name}
                 </h5>
                 <button

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 import requests
-from typing import List, Optional
+from typing import Optional
 import os
 
 
@@ -12,17 +12,22 @@ class Park(BaseModel):
 class MainImage(BaseModel):
     path: str
 
+
 class MaterialType(BaseModel):
     name: Optional[str]
+
 
 class Manufacturer(BaseModel):
     name: Optional[str]
 
+
 class SeatingType(BaseModel):
     name: Optional[str]
 
+
 class ParkForDetail(BaseModel):
     name: Optional[str]
+
 
 class Rollercoaster(BaseModel):
     id: int
@@ -32,6 +37,7 @@ class Rollercoaster(BaseModel):
     inversionsNumber: Optional[int]
     park: Park
     mainImage: MainImage
+
 
 class RollercoasterDetail(BaseModel):
     id: int
@@ -46,8 +52,8 @@ class RollercoasterDetail(BaseModel):
     materialType: Optional[MaterialType]
     seatingType: Optional[SeatingType]
 
-class CoastersQueries:
 
+class CoastersQueries:
     def get_all_coasters(self):
         rollercoasters = []
         page_num = 1

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from queries.favorites import Favorites, FavoritesIn, FavoritesOut, FavoritesRepository
+from queries.favorites import FavoritesIn, FavoritesOut, FavoritesRepository
 from authenticator import authenticator
 
 
@@ -16,7 +16,6 @@ def create_favorite(
 
 @router.get("/favorites")
 def get_favorite_by_user(
-    # user_id: int,
     repo: FavoritesRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data)
 ):
