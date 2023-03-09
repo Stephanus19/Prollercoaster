@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-//import { createContext } from "react";
 
 const initialState = {
   show: null,
@@ -24,7 +23,7 @@ export const accountSlice = createSlice({
       return initialState;
     },
   },
-}); 
+});
 
 export const { clearForm, updateField, showModal } = accountSlice.actions;
 

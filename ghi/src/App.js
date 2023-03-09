@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./LoginModal";
-import { useGetTokenQuery } from "./store/api.js";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
 import RollercoasterDetail from "./RollercoasterDetail";
@@ -31,7 +28,6 @@ function App() {
   return (
     <div>
       <ErrorNotification error={error} />
-      {/* <Construct info={launch_info} /> */}
       <BrowserRouter>
         <Nav />
           <Routes>

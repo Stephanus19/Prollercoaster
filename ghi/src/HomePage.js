@@ -52,7 +52,7 @@ function HomePage() {
   const { data: coasterList, isFetching } = useGetRollercoasterQuery();
   const [filter, setFilter] = useState("");
 
-  if (isFetching) {
+  if (isFetching || !coasterList) {
     return (
       <>
         <div className="loading-message container">...Loading</div>
@@ -65,7 +65,7 @@ function HomePage() {
     );
   }
 
-  const sortedCoasters = [...coasterList].sort((a, b) => {
+  const sortedCoasters = [...coasterList]?.sort((a, b) => {
     if (filter === "speed") {
       if (a.speed && b.speed) {
         return b.speed - a.speed;
