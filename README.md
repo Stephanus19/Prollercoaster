@@ -11,10 +11,10 @@ PROLLERCOASTER
 
 Design
 
-- API Design
-- Data model
-- GHI
-- Integration
+- ![API Design](/docs/api-design.md)
+- ![Database](/docs/database.md)
+- ![Front-end Wireframe](/docs/wireframe.png)
+- ![Integration](/docs/integrations.md)
 
 Intended market
 Our Target Market is the adventurous spirit who wants to seek thrills in the world around them; those searching for a family vacation; avid coaster fans; and those who want to keep track of the wonderful memories they have made or plan for those wonderful memories they have yet to make.
