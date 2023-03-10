@@ -14,11 +14,11 @@ Referenced by:
 
 
                                  Table "public.favorites"
-      Column      |  Type   | Collation | Nullable |                Default                
-------------------|---------|-----------|----------|--------------------------------------
- id               | integer |           | not null | nextval('favorites_id_seq'::regclass)
- user_id          | integer |           | not null | 
- rollercoaster_id | integer |           | not null | 
+|     Column      |  Type   | Collation | Nullable |                Default                |
+| :---------------| :------:|:---------:|:--------:| ------------------------------------: |
+| id               | integer |           | not null | nextval('favorites_id_seq'::regclass)|        
+| user_id          | integer |           | not null |                                      |
+| rollercoaster_id | integer |           | not null |                                      |
 Indexes:
     "favorites_pkey" PRIMARY KEY, btree (id)
 Foreign-key constraints:
