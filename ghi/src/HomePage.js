@@ -5,6 +5,7 @@ import AddFavorite from "./AddFavorite";
 import Roller from "./RollerVid.mp4";
 import RollercoasterDetail from "./RollercoasterDetail";
 import Shambhala from "./EEPOV";
+import BlueFire from "./EEPOV2";
 
 function Card({ rollercoasters }) {
   const { data: token } = useGetTokenQuery();
@@ -163,6 +164,7 @@ function HomePage() {
               );
             })}
           </div>
+          <BlueFire />
         </section>
       </div>
       <div>

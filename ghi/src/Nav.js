@@ -6,6 +6,7 @@ import Login from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import { useEffect } from "react";
 import ShowFavorites from "./FavoritesOffCanvas";
+import BlueFire from "./EEPOV2";
 
 export function LoginButtons(props) {
   const dispatch = useDispatch();

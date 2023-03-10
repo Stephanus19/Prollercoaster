@@ -55,7 +55,7 @@ function Shambhala() {
         data-bs-toggle="modal"
         data-bs-target="#ShambhalaVid"
       >
-        Proller Coaster
+        Shambhala
       </button>
     </>
   );
