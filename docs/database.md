@@ -1,12 +1,12 @@
                                       Table "public.accounts"
-   Column   |          Type           | Collation | Nullable |               Default                
-------------|-------------------------|----------------------|-----------------------------------
- id         | integer                 |           | not null | nextval('accounts_id_seq'::regclass)
- username   | character varying(50)   |           | not null | 
- password   | character varying(1000) |           | not null | 
- first_name | character varying(50)   |           | not null | 
- last_name  | character varying(50)   |           | not null | 
- email      | character varying(50)   |           | not null | 
+|   Column   |          Type           | Collation | Nullable |               Default                |
+| ---------- | ----------------------- | -------------------- | ----------------------------------   | 
+| id         | integer                 |           | not null | nextval('accounts_id_seq'::regclass) |
+| username   | character varying(50)   |           | not null |                                      |
+| password   | character varying(1000) |           | not null |                                      |
+| first_name | character varying(50)   |           | not null |                                      |
+| last_name  | character varying(50)   |           | not null |                                      |
+| email      | character varying(50)   |           | not null |                                      |
 Indexes:
     "accounts_pkey" PRIMARY KEY, btree (id)
 Referenced by:
