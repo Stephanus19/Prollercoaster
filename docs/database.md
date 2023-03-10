@@ -1,6 +1,6 @@
                                       Table "public.accounts"
 |   Column   |          Type           | Collation | Nullable |               Default                |
-| ---------- | ----------------------- | -------------------- | ----------------------------------   | 
+| :--------- | :---------------------: | :--------:| :------: | ---------------------------------:   | 
 | id         | integer                 |           | not null | nextval('accounts_id_seq'::regclass) |
 | username   | character varying(50)   |           | not null |                                      |
 | password   | character varying(1000) |           | not null |                                      |
