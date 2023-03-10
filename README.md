@@ -1,132 +1,39 @@
-# Module3 Project Gamma
+## Project Documentation
 
-## Install Extensions
+ReadME
 
-- Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-- Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+PROLLERCOASTER
 
-## Project layout
+- Whitley Spencer
+- Stephanus Chung
+- Alexis Weaver
+- Dean Grey
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+Design
 
-### Directories
+- API Design
+- Data model
+- GHI
+- Integration
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
+Intended market
+Our Target Market is the adventurous spirit who wants to seek thrills in the world around them; those searching for a family vacation; avid coaster fans; and those who want to keep track of the wonderful memories they have made or plan for those wonderful memories they have yet to make.
 
-The other directories, `ghi` and `rollercoaster_service`, are
-sample services, that you can start building off of or use
-as a reference point.
+Functionality
 
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
+- Visitors to Prollercoaster, pronounced ‘Rollercoaster’ with a ‘P’, are met with a thrilling dynamic video that plays while the content loads. Guests have the option to both log-in and sign up while this video plays and the teams logo and name are displayed in the top left corner of the page. Both the log-in button and sign in button are displayed as icons which when clicked present an easy to fill out modal form, again displaying the logo in the corner and placeholders describing how to enter the information. It should be noted that each of these modals present you with an option to use the other, if you meant to log in instead of sign up, or vice-versa. When the site content appears the content is a beautiful arrangement of various rollercoasters with details including the park they reside in, their maximum speed, maximum height, number of inversions, and a message telling you that logging in will all you to add each rollercoaster to a list of favorites. Upon clicking the roller coaster cards one can view a details page providing more information about the ride including what it is made out of, e.g wood or steel and the length of the ride. Visitors also have the capacity to sort the Roller Coasters presented neatly in card fashion by these attribute; speed, height, inversions, by park, or alphabetically. There may even be a few Easter eggs to ride a few featured rides from a first person perspective.
 
-Inside of `rollercoaster_service` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
+- Once a guest signs up or logs in they are greeted with a welcome message that remains at the center of the navbar telling them they were successful. The log in and sign up buttons are replaced with a logout button and the feature of adding and saving roller coasters to a favorite list, available through a favorites icon, which will appear on a left mounted off-canvas. The logout button will return you to the original state without a welcome message, with the reduced functionality, and the sign-up and log in buttons as options.
 
-Also in `rollercoaster_service` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
+Project Initialization
+To fully enjoy this application on your local machine, please make sure to follow these steps:
 
-The sample Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
-
-### Other files
-
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
-
-- `docker-compose.yaml`: there isn't much in here, just a
-  **really** simple UI and FastAPI service. Add services
-  (like a database) to this file as you did with previous
-  projects in module #2.
-- `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-  configure automated unit tests, code quality checks, and
-  the building and deployment of your production system.
-  Currently, all it does is deploy an "under construction"
-  page to your production UI on GitLab and a sample backend
-  to Render.com. We will learn much more about this file.
-- `.gitignore`: This is a file that prevents unwanted files
-  from getting added to your repository, files like
-  `pyc` files, `__pycache__`, etc. We've set it up so that
-  it has a good default configuration for Python projects.
-
-## How to complete the initial deploy
-
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
-
-### Setup GitLab repo/project
-
-- make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-- remove the fork relationship: In GitLab go to:
-
-  Settings -> General -> Advanced -> Remove fork relationship
-
-- add these GitLab CI/CD variables:
-  - PUBLIC_URL : this is your gitlab pages URL
-  - SAMPLE_SERVICE_API_HOST: enter "blank" for now
-
-#### Your GitLab pages URL
-
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
-
-If this is your project URL
-
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
-
-then your GitLab pages URL will be
-
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
-
-### Create render.com account and application
-
-- create account on render.com
-- one person create a group and invite all other members
-- create a new "Web Service"
-  - authenticate with GitLab and choose your project
-  - Enter fields:
-    - Name: name of your service
-    - Root Directory: the directory of your service in your git repo.
-      For this example use "sample_service".
-    - Environment: Docker
-    - Plan Type: Free
-  - click the "Create Web Service" button to create it
-  - the build will succeed and it will look like the server is running,
-    most likely, in 6-10 minutes, it will fail.
-  - click "Manual Deploy" -> "Deploy latest commit" and the service
-    should deploy successfully.
-
-### Update GitLab CI/CD variables
-
-Copy the service URL for your new render.com service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
-in GitLab.
-
-### Deploy it
-
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+1. Clone the repository down to your local machine using your terminal, from gitlab.
+2. Name the project a unique name.
+3. Change Directory(cd) into the new project directory.
+4. Run docker volume create postgres-data
+5. Run docker volume create pg-admin
+6. Run docker compose build
+7. Run docker compose up
+8. You will need to visit captaincoaster.com/api to obtain a key which you will place in a .env file set equal to RC_KEY.
+9. Visit localhost:3000 in your browser to tour our site.
